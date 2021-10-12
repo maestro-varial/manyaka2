@@ -1,0 +1,106 @@
+{% load i18n %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Certificate</title>
+        <style type="text/css">
+            * {
+            box-sizing: border-box;
+            }
+
+            .cert-container {
+            margin:65px 0 10px 0; 
+            width: 100%; 
+            display: flex; 
+            justify-content: center;
+            }
+
+            .cert {
+            width:800px; 
+            height:600px; 
+            padding:15px 20px; 
+            text-align:center; 
+            position: relative; 
+            z-index: -1;
+            }
+
+            #content2 {
+            }
+
+            .cert-content {
+                border: 10px solid black;
+            width:750px; 
+            height:470px; 
+            padding:70px 60px 0px 60px; 
+            text-align:center;
+            font-family: Arial, Helvetica, sans-serif;
+            
+            }
+
+            h1 {
+            font-size:44px;
+            }
+
+            p {
+            font-size:25px;
+            }
+
+            small {
+            font-size: 14px;
+            line-height: 12px;
+            }
+
+            .bottom-txt {
+            padding: 12px 5px; 
+            display: flex; 
+            justify-content: space-between;
+            font-size: 16px;
+            }
+
+            .bottom-txt * {
+            white-space: nowrap !important;
+            }
+
+            .heading-font {
+                font-size:44px;
+            font-family: Cambria, Georgia, serif;
+            font-style: italic;
+            }
+
+            .ml-215 {
+            margin-left: 215px;
+            }
+        </style>
+    </head>
+        <body>
+            <div class="cert-container print-m-0">
+                <div id="content2" class="cert">
+                    <div class="cert-content">
+                    <span class="heading-font">{% trans "Certificate of Completion" %}</span>
+                    <br>
+                    <br>
+                    <span style="font-size: 30px;">{{name}}</span>
+                    <br /><br />
+                    <span class="other-font"
+                        ><i><b>{% trans "Certificate of Completion" %}</b></i></span
+                    >
+                    <br />
+                    <br />
+                    <span style="font-size: 40px;"><b>{{course}}</b></span>
+                    <br />
+                    <br /><br /><br /><br />
+                    <small
+                        >{{certificate.content}}</small
+                    >
+                    <br>
+                    <br>
+                    <div class="bottom-txt">
+                        {% comment %} <span>Completed on: {{date}}</span> {% endcomment %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </body>
+</html>
+```

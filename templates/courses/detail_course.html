@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load course_extras %}
+
+
+{% block ExtraCSS %}
+    <link href="{% static 'css/detail_course.css' %}" rel="stylesheet" type="text/css">
+{% endblock ExtraCSS %}
+
+{% block header %}
+    <div class="header-main" style="background-image: url({% get_media_prefix %}main/header.jpg);">
+        <header>
+          <h1>{{course.title}}</h1>
+          <p>{{course.meta_desc}}</p>
+        </header>
+        <a href="#" class="btn btn-template">{% trans "Get Started Today" %}</a>
+    </div>
+{% endblock header %}
+
+{% block body %}
+    <article class="container">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-sm-12">
+                  <small class="fw-light text-muted">{{course.category.all.0}}</small>
+                  {% comment %} Course Info {% endcomment %}
+                  <figure>
+                    <blockquote class="blockquote">
+                      <h2>{{course.title}}</h2>
+                    </blockquote>
+                    <figcaption class="blockquote-footer fw-light">
+                      {{course.meta_desc}}
+                    </figcaption>
+                  </figure>
+                  <hr>
+                <div>
+                {% comment %} Syllabus {% endcomment %}
+                <div class="fs-2">{% trans "Syllabus" %}</div>
+                <br>
+                {% for curriculam in course.curriculams.all %}
+                  <div class="accordion curriculam-cont ms-2">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#curriculam-collapse{{forloop.counter}}" aria-expanded="false" aria-controls="curriculam-collapse{{forloop.counter}}">
+                          <small>
+                            {{curriculam.title}}
+                          </small>
+                        </button>
+                      </h2>
+                      <div id="curriculam-collapse{{forloop.counter}}" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                          <div class="text-muted">
+                            <small >{{curriculam.content|safe}}</small>
+                          </div>
+                          <div>
+                          {% if curriculam.video == True %}
+                            {% with forloop.counter|get_video:course.id as current_video %}
+                              {% if current_video.title %}
+                                <p class="lead"><i class="fas fa-video text-muted"></i> {{current_video.title}}</p>
+                              {% else %}
+                                <p class="lead"><i class="fas fa-video text-muted"></i> {% trans "Video Not Found" %}</p>
+                              {% endif %}
+                            {% endwith %}
+                          {% else %}
+                            <a href="" class="a_no_style lead"><i class="fas fa-file text-muted"></i> {% trans "Download File" %}</a>
+                          {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+          <div>
+          <br>
+          {% comment %} Author {% endcomment %}
+          <div><span class="fs-2">{% trans "Author" %}:</span><span class="ms-2 fs-6 text-muted">{{course.author}}</span></div>
+          <br>
+          {% comment %} Description {% endcomment %}
+          <div>
+            <div class="fs-2">{% trans "Description" %}</div>
+            <br>
+            <div class="ms-2">
+              {{course.desc|safe}}
+            </div>
+          </div>
+          {% comment %} Frequently Asked Questions {% endcomment %}
+          <div>
+            <div class="fs-2">{% trans "Frequently Asked Questions" %}</div>
+            <br>
+            <div class="ms-2">
+              {% for faq in course.faqs.all %}
+                <div class="accordion faq-cont ms-2">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-collapse{{forloop.counter}}" aria-expanded="false" aria-controls="faq-collapse{{forloop.counter}}">
+                        <small>
+                          {{faq.title}}
+                        </small>
+                      </button>
+                    </h2>
+                    <div id="faq-collapse{{forloop.counter}}" class="accordion-collapse collapse">
+                      <div class="accordion-body">
+                        {{faq.content|safe}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          </div>
+              </div>
+              <div class="col-md-5 col-sm-12 mt-2">
+                <div class="sticky-top">
+                  <div class="card border-0 shadow">
+                    <img src="{{course.imageURL}}" alt="{{course.slug}}">
+                    <div class="card-body p-1-9 px-xl-5">
+                        <div class="mb-2">
+                          <h3 class="fs-3 text-template mb-0">{{course.title}}</h3>
+                          <small class="text-muted">{{course.meta_desc}}</small>
+                        </div>
+                        <ul class="list-unstyled mb-0">
+                          <li class="mb-2">
+                            <p> {% trans "Online Access" %}: <span class="text-success">{% trans "True" %}</span></p>
+                          </li>
+                          <li class="mb-2">
+                            {% if course.discount > 0 %}
+                                <li>{% trans "Price" %}: 
+                                  <span class="text-decoration-line-through text-danger">{{course.initial_price}}$</span>
+                                  <span class="text-success">{{course.get_price}}$</span>
+                                </li>
+                            {% else %}
+                                <li><p>Price: <span class="text-success">{{course.initial_price}}$</span></p></li>
+                            {% endif %}
+                          </li>
+                          <li class="text-center mt-4">
+                            <a href="{{course.get_enroll_url}}" class="btn btn-success btn-lg">{% trans "Enroll Now" %}</a>
+                          </li>
+                        </ul>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </article>
+    <section id="reviews-cont" class="mt-5">
+      <div class="container">
+        <div class="col-md-12">
+            <div class="offer-dedicated-body-left ">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade active show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
+                        <div class="bg-white rounded shadow-sm p-4 mb-4 clearfix graph-star-rating">
+                            <h5 class="mb-0 mb-4">{% trans "Ratings and Reviews" %}</h5>
+                            <div class="graph-star-rating-header">
+                              <div class="mb-4 star-rating">
+                                {% for i in '12345'|make_list %}
+                                  <i class="fas fa-star fa-2x {% if course.get_rating >= forloop.counter %} text-primary {% else %} text-secondary {% endif %}"></i>
+                                {% endfor %}
+                              </div>
+                                <p class="text-black mb-4 mt-2">{% trans "Rated" %} {{course.get_rating}} {% trans "out of" %} 5</p>
+                            </div>
+                        </div>
+                        {% if request.user.profile.enrolled.all|enroll_contains:course.id %}
+                        <div class="bg-white rounded shadow-sm p-4 mb-5 rating-review-select-page">
+                            <h5 class="mb-4">{% trans "Leave Comment" %}</h5>
+                            <form id="review-form" data-url="{% url 'courses:ReviewViewAPI' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="course_id" value="{{course.id}}">
+                                <div class="form-group">
+                                  <label for="stars-selection">{% trans "Stars" %}</label>
+                                  <select class="form-select" name="stars" id="star-selection" aria-label="Default select example" required>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                    <option value="4">Four</option>
+                                    <option value="5">Five</option>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>{% trans "Your Comment" %}</label>
+                                    <textarea class="form-control" name="content"></textarea>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <button class="btn btn-primary btn-sm" type="submit"> {% trans "Submit Comment" %} </button>
+                                </div>
+                            </form>
+                        </div>
+                        {% endif %}
+                        <div class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
+                            <h5 class="mb-1">{% trans "All Ratings and Reviews" %}</h5>
+                            <p class="mb-1">{% trans "Reviews" %}: ({{course.reviews.count}})</p>
+                            {% for review in course.reviews.all %}
+                              <div class="reviews-members pt-4 pb-4">
+                                  <div class="media">
+                                      <a href="#"><img alt="Generic placeholder image" src="{{review.user.profile.profile_pic.url}}" class="mr-3 rounded-pill"></a>
+                                      <div class="media-body">
+                                          <div class="reviews-members-header">
+                                              <span class="star-rating float-right">
+                                                {% for i in '12345'|make_list %}
+                                                  <i class="fas fa-star {% if review.stars >= forloop.counter %} text-primary {% else %} text-secondary {% endif %}"></i>
+                                                {% endfor %}
+                                              </span>
+                                              <h6 class="mb-1"><a class="text-black" href="#">{{review.user.username}}</a></h6>
+                                              <p class="text-gray">{{review.created.date}}</p>
+                                          </div>
+                                          <div class="reviews-members-body">
+                                              <p>{{review.content}}</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock body %}
+
+{% block ExtraJS %}
+<script>
+document.getElementById("review-form").addEventListener('submit', (event)=>{
+  event.preventDefault();
+  const url = event.target.getAttribute('data-url')
+  loading(true);
+
+  let formData = new FormData(event.target)
+
+  $.ajax({
+    url: url,
+    dataType: "json",
+    type: "Post",
+    async: true,
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(data) {
+      const res_data = JSON.parse(data);
+      loading(false);
+      popUp('{% trans "Review Submited" %}')
+      location.reload()
+    },
+    error: function(err) {
+      loading(false);
+      if (err.status == 200){
+        popUp('{% trans "Review Submited" %}')
+        location.reload()
+      }
+    }
+  });
+
+})
+</script>
+{% endblock ExtraJS %}

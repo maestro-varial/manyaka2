@@ -1,0 +1,33 @@
+{% load static %}
+{% load i18n %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}">
+<article>
+    <h3><span>{% trans "Your Students" %}</span></h3>
+
+    <div class="courses-cont container">
+        <div class="row">
+            <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Role</th>
+                <th scope="col">Country</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for qs in students %}
+                {% for student in qs %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{student.user.username}}</td>
+                        <td>{{student.get_role_display}}</td>
+                        <td>{{student.country}}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block ExtraCSS %}
+    <link href="{% static 'css/product.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/home.css' %}" rel="stylesheet" type="text/css">
+{% endblock ExtraCSS %}
+
+{% block header %}
+    <div class="header-main" style="background-image: url({% get_media_prefix %}main/header.jpg);">
+        <header>
+          <h1>{% trans "List Courses Heading" %}</h1>
+          <p>{% trans "List Courses sub-Heading" %}</p>
+        </header>
+        <a href="#" class="btn btn-template">{% trans "Get Started Today" %}</a>
+    </div>
+{% endblock header %}
+
+{% block body %}
+    <article class="container">
+        <small>{{category}}</small>
+        <h3><span>{% trans "Found" %} ({{courses.count}}) {% trans "Courses" %}</span></h3>
+
+        <div class="courses-cont container">
+            <div class="row">
+            {% for course in courses %}
+                {% include 'template-parts/product-cont.html' %}
+            {% endfor %}
+            </div>
+        </div>
+    </article>
+{% endblock body %}
+
+{% block ExtraJS %}
+<script src="{% static 'js/manage_course.js' %}"></script>
+{% endblock ExtraJS %}

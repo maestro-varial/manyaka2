@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block ExtraCSS %}
+    <link href="{% static 'css/product.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/home.css' %}" rel="stylesheet" type="text/css">
+{% endblock ExtraCSS %}
+
+{% block header %}
+    <div class="header-main" style="background-image: url({% get_media_prefix %}main/header.jpg);">
+        <header>
+          <h1>{% trans "Proceed To Checkout" %}</h1>
+          <p>{% trans "Checkout sub-heading" %}</p>
+        </header>
+        <a href="#" class="btn btn-template">{% trans "Get Started Today" %}</a>
+    </div>
+{% endblock header %}
+
+{% block body %}
+<article class="container">
+    <div class="row">
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">{% trans "Your cart" %}</span>
+            <span class="badge bg-primary rounded-pill">{{order.get_cart_items}}</span>
+            </h4>
+            <ul class="list-group mb-3">
+            {% for item in order.items.all %}
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                    <h6 class="my-0">{{item.referring_course.title}}</h6>
+                    <small class="text-muted">{{item.referring_course.meta_desc}}</small>
+                </div>
+                <span class="text-muted">${{item.referring_course.get_price}}</span>
+            </li>
+            {% endfor %}
+            {% if order.coupon_valid %}
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                    <h6 class="my-0">{% trans "Promo code" %}</h6>
+                    <small>{{order.coupon}}</small>
+                    </div>
+                    <span class="text-success">−${{order.coupon.amount}}</span>
+                </li>
+            {% endif %}
+            <li class="list-group-item d-flex justify-content-between">
+                <span>{% trans "Total Price" %}</span>
+                <strong>${{order.get_cart_total}}</strong>
+            </li>
+            </ul>
+
+            <form id="promo-form" data-url="{% url 'ecommerce:AddCouponAPI' %}" class="card p-2">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input name="code" type="text" class="form-control" placeholder="Promo code">
+                    <button type="submit" class="btn btn-secondary">{% trans "Redeem" %}</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">{% trans "Payment" %}</h4>
+            <form id="checkout-form" data-url="{% url 'ecommerce:ProceedCheckoutAPI' %}" class="needs-validation"> {% comment %} 'was-validated' class to show invalid mode {% endcomment %}
+                <div class="my-3">
+                    <div class="form-check">
+                    <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" value='' required >
+                    <label class="form-check-label" for="credit">{% trans "Credit card" %}</label>
+                    </div>
+                    <div class="form-check">
+                    <input id="debit" name="paymentMethod" type="radio" class="form-check-input" value='' required >
+                    <label class="form-check-label" for="debit">{% trans "Debit card" %}</label>
+                    </div>
+                    <div class="form-check">
+                    <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" value='' required >
+                    <label class="form-check-label" for="paypal">{% trans "PayPal" %}</label>
+                    </div>
+                </div>
+
+                <div class="row gy-3">
+                    <div class="col-md-6">
+                    <label for="cc-name" class="form-label">{% trans "Name on card" %}</label>
+                    <input type="text" class="form-control" id="cc-name" placeholder="" value='' required >
+                    <small class="text-muted">{% trans "Full name as displayed on card" %}</small>
+                    <div class="invalid-feedback">
+                        {% trans "Name on card is required" %}
+                    </div>
+                    </div>
+
+                    <div class="col-md-6">
+                    <label for="cc-number" class="form-label">{% trans "Credit card number" %}</label>
+                    <input type="text" class="form-control" id="cc-number" placeholder="" value='' required >
+                    <div class="invalid-feedback">
+                        {% trans "Credit card number is required" %}
+                    </div>
+                    </div>
+
+                    <div class="col-md-3">
+                    <label for="cc-expiration" class="form-label">{% trans "Expiration" %}</label>
+                    <input type="text" class="form-control" id="cc-expiration" placeholder="" value='' required >
+                    <div class="invalid-feedback">
+                        {% trans "Expiration date required" %}
+                    </div>
+                    </div>
+
+                    <div class="col-md-3">
+                    <label for="cc-cvv" class="form-label">CVV</label>
+                    <input type="text" class="form-control" id="cc-cvv" placeholder="" value='' required >
+                    <div class="invalid-feedback">
+                        {% trans "Security code required" %}
+                    </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <button class="w-100 btn btn-primary btn-lg" type="submit">{% trans "Continue" %}</button>
+            </form>
+        </div>
+    </div>
+</article>
+{% endblock body %}
+
+{% block ExtraJS %}
+<script>
+document.getElementById('checkout-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (loading()) return;
+    const url = event.target.getAttribute('data-url')
+    const csrfToken = document.querySelector("input[name='csrfmiddlewaretoken']").value
+    const formData = new FormData(event.target)
+    loading(true);
+
+    $.ajax({
+        url: url,
+        dataType: "json",
+        headers: { "X-CSRFToken": csrfToken },
+        type: "Post",
+        async: true,
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (res) {
+            console.log(res)
+            if (res.status == 200){
+                popUp('{% trans "Payment Done" %}!')
+                window.location.reload()
+            }
+            loading(false);
+        },
+        error: function (err) {
+            console.log(err)
+            if (err.status == 200){
+                popUp('{% trans "Payment Done" %}!')
+                window.location.reload()
+            }
+            loading(false);
+        }
+    });
+});
+document.getElementById('promo-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (loading()) return;
+    const url = event.target.getAttribute('data-url')
+    const formData = new FormData(event.target)
+    loading(true);
+
+    $.ajax({
+        url: url,
+        dataType: "json",
+        type: "Post",
+        async: true,
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (res) {
+            console.log(res)
+            if (res.status == 200){
+                popUp('{% trans "Promo Applied" %}!')
+            }
+            loading(false);
+            window.location.reload()
+        },
+        error: function (err) {
+            console.log(err)
+            if (err.status == 200){
+                popUp('{% trans "Promo Applied" %}!')
+            }
+            loading(false);
+            window.location.reload()
+        }
+    });
+});
+</script>
+{% endblock ExtraJS %}

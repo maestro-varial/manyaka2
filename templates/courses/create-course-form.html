@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block ExtraCSS %}
+    <link href="{% static 'css/auth.css' %}" rel="stylesheet" type="text/css">
+{% endblock ExtraCSS %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block body %}
+
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="card cardbox">
+        <div class="card-header">{% trans "Create Course" %}</div>
+        <div class="card-body">
+          
+          <div class="form-group">
+            <form action="{% url 'courses:CreateCourseView' %}" method="post" role="form" class="form" accept-charset="UTF-8" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{course_form|crispy}}
+
+              <h3 class="hr-text mt-5"><span>{% trans "Curriculams" %}</span></h3>
+              <div class="curriculam-cont">
+                <div class="sub-form">
+                    {{curriculam_form|crispy}}
+                    <hr>
+                    <button data-name="curriculams" class="add-btn btn btn-template w-100 my-4" type="button">{% trans "Add More" %}</button>
+                </div>
+              </div>
+
+              <h3 class="hr-text mt-5"><span>{% trans "Videos" %}</span></h3>
+              <div class="videos-cont">
+                <div class="sub-form">
+                    {{video_form|crispy}}
+                    <hr>
+                    <button data-name="videos" class="add-btn btn btn-template w-100 my-4" type="button">{% trans "Add More" %}</button>
+                </div>
+              </div>
+
+              <h3 class="hr-text mt-5"><span>{% trans "Features" %}</span></h3>
+              <div class="features-cont">
+                <div class="sub-form">
+                    {{features_form|crispy}}
+                    <hr>
+                    <button data-name="features" class="add-btn btn btn-template w-100 my-4" type="button">{% trans "Add More" %}</button>
+                </div>
+              </div>
+
+              <h3 class="hr-text mt-5"><span>{% trans "Faqs" %}</span></h3>
+              <div class="faqs-cont">
+                <div class="sub-form">
+                    {{faq_form|crispy}}
+                    <hr>
+                    <button data-name="faqs" class="add-btn btn btn-template w-100 my-4" type="button">{% trans "Add More" %}</button>
+                </div>
+              </div>
+
+              <h3 class="hr-text mt-5"><span>{% trans "MCQs" %}</span></h3>
+              <div class="faqs-cont">
+                <div class="sub-form">
+                    {{mcq_form|crispy}}
+                    <hr>
+                    <button data-name="mcqs" class="add-btn btn btn-template w-100 my-4" type="button">{% trans "Add More" %}</button>
+                </div>
+              </div>
+
+              <h3 class="hr-text mt-5"><span>{% trans "Certificate" %}</span></h3>
+              <div class="certificate-cont">
+                <div class="sub-form">
+                    {{certificate_form|crispy}}
+                    <hr>
+                </div>
+              </div>
+
+              <input type="submit" value="Submit" class="btn btn-block btn-template mt-3">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+
+{% endblock body %}
+
+{% block ExtraJS %}
+<script type="text/javascript" src="{% static 'js/course-form.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+{% endblock ExtraJS %}

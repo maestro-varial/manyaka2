@@ -1,0 +1,105 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link href="{% static 'fontawesome_free/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome_free/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome_free/css/solid.css' %}" rel="stylesheet" type="text/css">
+    {% block ExtraCSS %}
+
+    {% endblock ExtraCSS %}
+    <title>E-Learning!</title>
+  </head>
+  <body>
+    <i id="main-loader" class="fas fa-circle-notch hidden"></i>
+    {% csrf_token %}
+    
+    {% include 'template-parts/top-navbar.html' %}
+
+    {% block header %}
+    <div class="header-main" style="background-image: url({% get_media_prefix %}main/header.jpg);">
+        <header>
+          <h1>{% trans "Header Heading" %}</h1>
+          <p>{% trans "Header Sub-Heading" %}</p>
+        </header>
+        <a href="#" class="btn btn-template">{% trans "Get Started Today" %}</a>
+    </div>
+    {% endblock header %}
+
+    <main>
+      {% block body %}
+
+      {% endblock body %}
+    </main>
+
+    <!----footer-section------>
+    {% include 'template-parts/footer.html' %}
+
+    <div id="message-area" class="hidden d-flex justify-content-center align-items-center p-2 bg-dark">
+      <p id="text-content" class="lead text-light">Demo Notification</p>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous" defer></script>
+
+    <script>
+
+    document.querySelectorAll('.dropdown-toggle').forEach(item => {
+      item.addEventListener('click', event => {
+    
+        if(event.target.classList.contains('dropdown-toggle') ){
+          event.target.classList.toggle('toggle-change');
+        }
+        else if(event.target.parentElement.classList.contains('dropdown-toggle')){
+          event.target.parentElement.classList.toggle('toggle-change');
+        }
+      })
+    });
+
+    function loading(state=null){
+      let loader = document.getElementById('main-loader');
+      if (state === true){
+        loader.classList.toggle('fa-spin',true)
+        loader.classList.toggle('hidden',false)
+      }else if(state === false){
+        loader.classList.toggle('fa-spin',false)
+        loader.classList.toggle('hidden',true)
+      }else{
+        if (loader.classList.contains('fa-spin') && !loader.classList.contains('hidden')){
+          return true
+        }else{
+          return false
+        }
+      }
+    }
+    </script>
+
+    <script defer>
+      let to = null;
+      function popUp(msg){
+        if (to){
+          clearTimeout(to)
+        }
+        const message_area = document.getElementById('message-area');
+        message_area.classList.toggle('hidden',true)
+        message_area.querySelector('#text-content').innerText = msg
+        setTimeout(()=>{
+          message_area.classList.toggle('hidden',false)
+        },200)
+        to = setTimeout(()=>{
+          message_area.classList.toggle('hidden',true)
+        },2000)
+      }
+    </script>
+    
+    {% block ExtraJS %}
+
+    {% endblock ExtraJS %}
+</body>
+</html>

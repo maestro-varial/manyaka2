@@ -1,0 +1,80 @@
+{% load i18n %}
+<footer class="deneb_footer">
+	<div class="widget_wrapper" style="background-image: url(http://demo.tortoizthemes.com/deneb-html/deneb-ltr/assets/images/footer_bg.png);">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="widget widegt_about">
+						<div class="widget_title">
+							<img src="assets/images/logo_1.png" class="img-fluid" alt="">
+						</div>
+						<p>{% trans "Footer Description" %}</p>
+						<ul class="social">
+							<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="widget widget_link">
+						<div class="widget_title">
+							<h4>{% trans "Links" %}</h4>
+						</div>
+						<ul>
+						{% for category in footcategories %}
+							<li><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>
+						{% endfor %}
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="widget widget_contact">
+						<div class="widget_title">
+							<h4>{% trans "Contact Us" %}</h4>
+						</div>
+						<div class="contact_info">
+							<div class="single_info">
+								<div class="icon">
+									<i class="fas fa-phone-alt"></i>
+								</div>
+								<div class="info">
+									<p><a href='tel:{% trans "telephone-num" %}'>{% trans "telephone-num" %}</a></p>
+									<p><a href='tel:{% trans "Phone Number" %}'>{% trans "Phone Number" %}</a></p>
+								</div>
+							</div>
+							<div class="single_info">
+								<div class="icon">
+									<i class="fas fa-envelope"></i>
+								</div>
+								<div class="info">
+									<p><a href='mailto:{% trans "info@email.com" %}'>{% trans "info@email.com" %}</a></p>
+									<p><a href='mailto:{% trans "services@email.com" %}'>{% trans "services@email.com" %}</a></p>
+								</div>
+							</div>
+							<div class="single_info">
+								<div class="icon">
+									<i class="fas fa-map-marker-alt"></i>
+								</div>
+								<div class="info">
+									<p>{% trans "125, Park street aven, Brocklyn," %}<span>{% trans "Newyork." %}</span></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="copyright_area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="copyright_text">
+						<p>{% trans "Copyright" %} &copy; 2021 {% trans "All rights reserved." %}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>

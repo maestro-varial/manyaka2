@@ -1,0 +1,478 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-09 04:34+0000\n"
+"PO-Revision-Date: 2021-10-09 04:50+0000\n"
+"Last-Translator:   <aneeq@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.9.7\n"
+
+#: core/settings.py:166
+msgid "English"
+msgstr ""
+
+#: core/settings.py:167
+msgid "French"
+msgstr ""
+
+#: templates/auth/login.html:14
+msgid "Sign In"
+msgstr ""
+
+#: templates/auth/login.html:15
+msgid "Sign In sub-heading"
+msgstr ""
+
+#: templates/auth/login.html:17 templates/auth/signup.html:18
+#: templates/base.html:31 templates/courses/detail_course.html:16
+#: templates/courses/home.html:16 templates/courses/list_courses.html:15
+#: templates/courses/search.html:15 templates/ecommerce/cart.html:15
+#: templates/ecommerce/checkout.html:15
+msgid "Get Started Today"
+msgstr ""
+
+#: templates/auth/login.html:29 templates/template-parts/top-navbar.html:56
+msgid "Log In"
+msgstr ""
+
+#: templates/auth/login.html:31
+msgid "Log In With Google"
+msgstr ""
+
+#: templates/auth/login.html:44
+msgid "Don't have an account"
+msgstr ""
+
+#: templates/auth/login.html:44 templates/auth/signup.html:15
+#: templates/auth/signup.html:30 templates/template-parts/top-navbar.html:53
+msgid "Sign Up"
+msgstr ""
+
+#: templates/auth/signup.html:16
+msgid "Sign Up sub-heading"
+msgstr ""
+
+#: templates/auth/signup.html:32
+msgid "Sign Up With Google"
+msgstr ""
+
+#: templates/auth/signup.html:47
+msgid "Already Registered"
+msgstr ""
+
+#: templates/auth/signup.html:47
+msgid "Login"
+msgstr ""
+
+#: templates/base.html:28 templates/courses/home.html:13
+msgid "Header Heading"
+msgstr "Ther is something sawesome"
+
+#: templates/base.html:29 templates/courses/home.html:14
+msgid "Header Sub-Heading"
+msgstr ""
+
+#: templates/courses/create-course-form.html:22
+#: templates/template-parts/base-settings.html:29
+msgid "Create Course"
+msgstr ""
+
+#: templates/courses/create-course-form.html:30
+msgid "Curriculams"
+msgstr ""
+
+#: templates/courses/create-course-form.html:35
+#: templates/courses/create-course-form.html:44
+#: templates/courses/create-course-form.html:53
+#: templates/courses/create-course-form.html:62
+msgid "Add More"
+msgstr ""
+
+#: templates/courses/create-course-form.html:39
+msgid "Videos"
+msgstr ""
+
+#: templates/courses/create-course-form.html:48
+msgid "Features"
+msgstr ""
+
+#: templates/courses/create-course-form.html:57
+#: templates/courses/create-course-form.html:66
+msgid "Faqs"
+msgstr ""
+
+#: templates/courses/detail_course.html:41
+#: templates/courses/enroll_course.html:84
+msgid "Syllabus"
+msgstr ""
+
+#: templates/courses/detail_course.html:64
+#: templates/courses/enroll_course.html:109
+#: templates/template-parts/embed-404.html:3
+#: templates/template-parts/embed-video.html:5
+msgid "Video Not Found"
+msgstr ""
+
+#: templates/courses/detail_course.html:68
+#: templates/courses/enroll_course.html:113
+#: templates/courses/enroll_course.html:118
+msgid "Download File"
+msgstr ""
+
+#: templates/courses/detail_course.html:81
+#: templates/courses/enroll_course.html:41
+msgid "Author"
+msgstr ""
+
+#: templates/courses/detail_course.html:86
+#: templates/courses/enroll_course.html:46
+msgid "Description"
+msgstr ""
+
+#: templates/courses/detail_course.html:95
+#: templates/courses/enroll_course.html:55
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: templates/courses/detail_course.html:131
+msgid "Online Access"
+msgstr ""
+
+#: templates/courses/detail_course.html:131
+msgid "True"
+msgstr ""
+
+#: templates/courses/detail_course.html:135 templates/ecommerce/cart.html:33
+#: templates/ecommerce/cart.html:35
+msgid "Price"
+msgstr ""
+
+#: templates/courses/detail_course.html:144
+msgid "Enroll Now"
+msgstr ""
+
+#: templates/courses/detail_course.html:160
+msgid "Ratings and Reviews"
+msgstr ""
+
+#: templates/courses/detail_course.html:167
+msgid "Rated"
+msgstr ""
+
+#: templates/courses/detail_course.html:167
+msgid "out of"
+msgstr ""
+
+#: templates/courses/detail_course.html:172
+msgid "Leave Comment"
+msgstr ""
+
+#: templates/courses/detail_course.html:177
+msgid "Stars"
+msgstr ""
+
+#: templates/courses/detail_course.html:187
+msgid "Your Comment"
+msgstr ""
+
+#: templates/courses/detail_course.html:191
+msgid "Submit Comment"
+msgstr ""
+
+#: templates/courses/detail_course.html:197
+msgid "All Ratings and Reviews"
+msgstr ""
+
+#: templates/courses/detail_course.html:198
+msgid "Reviews"
+msgstr ""
+
+#: templates/courses/detail_course.html:251
+#: templates/courses/detail_course.html:257
+msgid "Review Submited"
+msgstr ""
+
+#: templates/courses/enroll_course.html:133
+msgid "Completed"
+msgstr ""
+
+#: templates/courses/enroll_course.html:136
+msgid "Confirm"
+msgstr ""
+
+#: templates/courses/enroll_course.html:141
+msgid "Claim Certificate"
+msgstr ""
+
+#: templates/courses/home.html:24
+msgid "Top-selling Courses"
+msgstr ""
+
+#: templates/courses/home.html:39
+msgid "What People Say About Us"
+msgstr ""
+
+#: templates/courses/list_courses.html:12
+msgid "List Courses Heading"
+msgstr ""
+
+#: templates/courses/list_courses.html:13
+msgid "List Courses sub-Heading"
+msgstr ""
+
+#: templates/courses/list_courses.html:22 templates/courses/search.html:21
+#: templates/template-parts/enrolled-courses.html:5
+#: templates/template-parts/my-courses.html:5
+msgid "Found"
+msgstr ""
+
+#: templates/courses/list_courses.html:22 templates/courses/search.html:21
+#: templates/ecommerce/cart.html:24
+#: templates/template-parts/enrolled-courses.html:5
+#: templates/template-parts/my-courses.html:5
+msgid "Courses"
+msgstr ""
+
+#: templates/courses/search.html:12
+msgid "Searched For"
+msgstr ""
+
+#: templates/ecommerce/cart.html:12
+msgid "Your Cart"
+msgstr ""
+
+#: templates/ecommerce/cart.html:13
+msgid "Cart sub-heading"
+msgstr ""
+
+#: templates/ecommerce/cart.html:24
+msgid "Continue Learning"
+msgstr ""
+
+#: templates/ecommerce/cart.html:42
+msgid "Remove"
+msgstr ""
+
+#: templates/ecommerce/cart.html:48 templates/ecommerce/checkout.html:12
+msgid "Proceed To Checkout"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:13
+msgid "Checkout sub-heading"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:24
+msgid "Your cart"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:40
+msgid "Promo code"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:47
+msgid "Total Price"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:56
+msgid "Redeem"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:61
+msgid "Payment"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:67
+msgid "Credit card"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:71
+msgid "Debit card"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:75
+msgid "PayPal"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:81
+msgid "Name on card"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:83
+msgid "Full name as displayed on card"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:85
+msgid "Name on card is required"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:90
+msgid "Credit card number"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:93
+msgid "Credit card number is required"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:98
+msgid "Expiration"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:101
+msgid "Expiration date required"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:109
+msgid "Security code required"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:116
+msgid "Continue"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:145 templates/ecommerce/checkout.html:153
+msgid "Payment Done"
+msgstr ""
+
+#: templates/ecommerce/checkout.html:178 templates/ecommerce/checkout.html:186
+msgid "Promo Applied"
+msgstr ""
+
+#: templates/template-parts/account-sidebar.html:9
+msgid "Joined"
+msgstr ""
+
+#: templates/template-parts/base-settings.html:22
+msgid "Profile Settings"
+msgstr ""
+
+#: templates/template-parts/base-settings.html:23
+msgid "Enrolled Courses"
+msgstr ""
+
+#: templates/template-parts/base-settings.html:27
+msgid "Students"
+msgstr ""
+
+#: templates/template-parts/base-settings.html:28
+msgid "Your Courses"
+msgstr ""
+
+#: templates/template-parts/base-settings.html:38
+#: templates/template-parts/top-navbar.html:44
+msgid "Hi"
+msgstr ""
+
+#: templates/template-parts/base-settings.html:38
+msgid "Nice to see you again!"
+msgstr ""
+
+#: templates/template-parts/base-settings.html:39
+msgid "Its your settings panel."
+msgstr ""
+
+#: templates/template-parts/certificate.html:78
+#: templates/template-parts/certificate.html:84
+msgid "Certificate of Completion"
+msgstr ""
+
+#: templates/template-parts/enrolled-product-cont.html:8
+#: templates/template-parts/product-cont.html:9
+msgid "View"
+msgstr ""
+
+#: templates/template-parts/footer.html:11
+msgid "Footer Description"
+msgstr ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
+"tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"
+" quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo "
+"consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse "
+"cillum dolore eu fugiat nulla pariatur."
+
+#: templates/template-parts/footer.html:22
+msgid "Links"
+msgstr ""
+
+#: templates/template-parts/footer.html:34
+msgid "Contact Us"
+msgstr ""
+
+#: templates/template-parts/footer.html:42
+msgid "telephone-num"
+msgstr ""
+
+#: templates/template-parts/footer.html:43
+msgid "Phone Number"
+msgstr ""
+
+#: templates/template-parts/footer.html:51
+msgid "info@email.com"
+msgstr ""
+
+#: templates/template-parts/footer.html:52
+msgid "services@email.com"
+msgstr ""
+
+#: templates/template-parts/footer.html:60
+msgid "125, Park street aven, Brocklyn,"
+msgstr "You address"
+
+#: templates/template-parts/footer.html:60
+msgid "Newyork."
+msgstr ""
+
+#: templates/template-parts/footer.html:74
+msgid "Copyright"
+msgstr ""
+
+#: templates/template-parts/footer.html:74
+msgid "All rights reserved."
+msgstr ""
+
+#: templates/template-parts/my-students.html:5
+msgid "Your Students"
+msgstr ""
+
+#: templates/template-parts/profile-edit-form.html:11
+msgid "Update Profile"
+msgstr ""
+
+#: templates/template-parts/top-navbar.html:9
+msgid "E-Learning"
+msgstr ""
+
+#: templates/template-parts/top-navbar.html:16
+msgid "Language"
+msgstr ""
+
+#: templates/template-parts/top-navbar.html:32
+msgid "Search"
+msgstr ""
+
+#: templates/template-parts/top-navbar.html:36
+msgid "All Courses"
+msgstr ""
+
+#: templates/template-parts/top-navbar.html:46
+msgid "Cart"
+msgstr ""
+
+#: templates/template-parts/top-navbar.html:47
+msgid "Settings"
+msgstr ""
+
+#: templates/template-parts/top-navbar.html:48
+msgid "Log Out"
+msgstr ""

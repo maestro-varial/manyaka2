@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block ExtraCSS %}
+    <link href="{% static 'css/product.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/home.css' %}" rel="stylesheet" type="text/css">
+{% endblock ExtraCSS %}
+
+{% block header %}
+    <div class="header-main" style="background-image: url({% get_media_prefix %}main/header.jpg);">
+        <header>
+          <h1>{% trans "Header Heading" %}</h1>
+          <p>{% trans "Header Sub-Heading" %}</p>
+        </header>
+        <a href="#" class="btn btn-template">{% trans "Get Started Today" %}</a>
+    </div>
+{% endblock header %}
+
+{% block body %}
+    <article>
+        {% comment %} Top Rated Courses {% endcomment %}
+        <h3 class="hr-text"><span>{% trans "Top-selling Courses" %}</span></h3>
+
+        <div class="courses-cont container">
+            <div class="row">
+            {% for course in courses %}
+                {% include 'template-parts/product-cont.html' %}
+            {% endfor %}
+            </div>
+        </div>
+
+
+
+
+        {% comment %} Testimonials {% endcomment %}
+        <h3 class="hr-text"><span>{% trans "What People Say About Us" %}</span></h3>
+        <section>
+            <div class="container">
+                <div class="row">
+                {% for testimonial in testimonials %}
+                    <div class="col-md-4 col-sm-12">
+                        <div class="widget-container">
+                            <div class="widget">
+                                <div class="profile-card">
+                                    <div class="card-header">
+                                        <div class="header-avatar">
+                                            <img src="{{testimonial.image.url}}" alt="andy">
+                                        </div>
+                                        <div class="header-name">
+                                            {{testimonial.name}}
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="body-description">
+                                            {{testimonial.content}}
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="footer-social">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <a target="_blank" href="{% if testimonial.facebook %}{{testimonial.facebook}}{% endif %}">
+                                                        <i class="fab fa-facebook"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <a target="_blank" href="{% if testimonial.twitter %}{{testimonial.twitter}}{% endif %}">
+                                                        <i class="fab fa-twitter"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <a target="_blank" href="{% if testimonial.dribble %}{{testimonial.dribble}}{% endif %}">
+                                                        <i class="fab fa-dribbble"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-3">
+                                                    <a target="_blank" href="{% if testimonial.instagram %}{{testimonial.instagram}}{% endif %}">
+                                                        <i class="fab fa-instagram"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        
+    </article>
+{% endblock body %}
+
+{% block ExtraJS %}
+<script src="{% static 'js/manage_course.js' %}"></script>
+{% endblock ExtraJS %}

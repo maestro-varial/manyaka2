@@ -1,0 +1,24 @@
+{% load i18n %}
+<div class="col-lg-4 col-md-6 col-12">
+    <div class="card product_item shadow">
+        <div class="body">
+            <div class="cp_img">
+                <img src="{{course.imageURL}}" alt="Product" class="img-fluid">
+                <div class="hover">
+                    <a href="{{course.get_absolute_url}}" class="btn btn-warning btn-sm">{% trans "View" %}</a>
+                </div>
+            </div>
+            <div class="product_details">
+                <h5><a href="{{course.get_absolute_url}}" class="a_no_style">{{course.title}}</a></h5>
+                <ul class="product_price list-unstyled">
+                    {% if course.discount > 0 %}
+                        <li class="old_price text-decoration-line-through">{{course.initial_price}}$</li>
+                        <li class="new_price">{{course.get_price}}$</li>
+                    {% else %}
+                        <li class="old_price">{{course.get_price}}$</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

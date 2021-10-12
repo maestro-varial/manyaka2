@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block ExtraCSS %}
+    <link href="{% static 'css/auth-settings.css' %}" rel="stylesheet" type="text/css">
+{% endblock ExtraCSS %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-4 pb-5">
+            {% include 'template-parts/account-sidebar.html' %}
+            <div class="wizard">
+                <nav class="list-group list-group-flush">
+                    <a class="list-group-item setting-tabs" data-url="{% url 'users:EditProfileAPI' %}"><i class="fas fa-user-cog text-muted"></i>{% trans "Profile Settings" %}</a>
+                    <a class="list-group-item setting-tabs" data-url="{% url 'courses:GetEnrolledCoursesAPI' %}"><i class="fas fa-book-open text-muted"></i>{% trans "Enrolled Courses" %}</a>
+                    {% if request.user.profile.role == 't' %}
+                        {% comment %} <a class="list-group-item setting-tabs" data-url="{% url 'users:TeacherAreaView' %}"><i class="fas fa-chart-line text-muted"></i>{% trans "Dashboard" %}`</a> {% endcomment %}
+                        <a class="list-group-item setting-tabs" data-url="{% url 'users:MyStudents' %}"><i class="fas fa-users text-muted"></i>{% trans "Students" %}</a>
+                        <a class="list-group-item setting-tabs" data-url="{% url 'users:MyCourses' %}"><i class="fas fa-book text-muted"></i>{% trans "Your Courses" %}</a>
+                        <a class="list-group-item" href="{% url 'courses:CreateCourseView' %}"><i class="fas fa-book-medical text-muted"></i>{% trans "Create Course" %}</a>
+                        {% comment %} <a class="list-group-item setting-tabs" data-url="{% url 'users:TeacherAreaView' %}"><i class="fas fa-wallet text-muted"></i>{% trans "Earnings" %}</a> {% endcomment %}
+                    {% endif %}
+                </nav>
+            </div>
+        </div>
+        <div id="main-settings" class="col-lg-8 pb-5">
+            <div>
+                <h2>{% trans "Hi" %}, {{request.user.username}}. {% trans "Nice to see you again!" %}</h2>
+                <p class="lead">{% trans "Its your settings panel." %}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block ExtraJS %}
+<script src="{% static 'js/base-settings.js' %}"></script>
+{% endblock ExtraJS %}

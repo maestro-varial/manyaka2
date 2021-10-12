@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load course_extras %}
+
+
+{% block ExtraCSS %}
+    <link href="{% static 'css/detail_course.css' %}" rel="stylesheet" type="text/css">
+{% endblock ExtraCSS %}
+
+{% block header %}
+<br>
+{% endblock header %}
+
+{% block body %}
+<article class="container">
+  <div>
+    <div class="row">
+      <div class="col-8">
+        <h2 class="text-muted fs-4"><a href="{{course.get_absolute_url}}"><i class="fas fa-arrow-left text-muted"></i></a> {{course.title}}</h2>
+      </div>
+      <hr>
+      <div class="col-md-8 col-sm-12">
+        <div>
+          <div class="card border-0 shadow-sm">
+            <div id="video-frame">
+              <img src="{{course.imageURL}}" alt="{{course.slug}}">
+            </div>
+            <div class="card-body p-1-9 px-xl-5">
+              <div class="mb-2">
+                <h3 class="fs-3 text-template mb-0">{{course.title}}</h3>
+                <small class="text-muted">{{course.meta_desc}}</small>
+              </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <br> {% comment %} Author {% endcomment %}
+          <div><span class="fs-2">{% trans "Author" %}:</span><span class="ms-2 fs-6 text-muted">{{course.author}}</span>
+          </div>
+          <br> {% comment %} Description {% endcomment %}
+          <div>
+            <div class="fs-2">{% trans "Description" %}</div>
+            <br>
+            <div class="ms-2">
+              {{course.desc|safe}}
+            </div>
+          </div>
+          {% comment %} Frequently Asked Questions {% endcomment %}
+          <div>
+            <div class="fs-2">{% trans "Frequently Asked Questions" %}</div>
+            <br>
+            <div class="ms-2">
+              {% for faq in course.faqs.all %}
+              <div class="accordion faq-cont ms-2">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-collapse{{forloop.counter}}" aria-expanded="false" aria-controls="faq-collapse{{forloop.counter}}">
+                      <small>
+                        {{faq.title}}
+                      </small>
+                    </button>
+                  </h2>
+                  <div id="faq-collapse{{forloop.counter}}" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                      {{faq.content|safe}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div>
+          {% comment %} Syllabus {% endcomment %}
+          <div class="fs-2">{% trans "Syllabus" %}</div>
+          <br> 
+          {% for curriculam in course.curriculams.all %}
+          <div class="accordion curriculam-cont ms-2">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#curriculam-collapse{{forloop.counter}}" aria-expanded="false" aria-controls="curriculam-collapse{{forloop.counter}}">
+                  <small>
+                    {{curriculam.title}}
+                  </small>
+                </button>
+              </h2>
+              <div id="curriculam-collapse{{forloop.counter}}" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  <div class="text-muted">
+                    <small>{{curriculam.content|safe}}</small>
+                  </div>
+                  <div>
+                    {% if curriculam.video == True %}
+                      {% with forloop.counter|get_video:course.id as current_video %}
+                        {% if current_video.title %}
+                          {% comment %} {% video current_video.url 'small' %} {% endcomment %}
+                          <a href="#" data-url="{% url 'courses:GetVideoAPI' %}" data-id="{{current_video.id}}" class="video-change a_no_style lead"><i class="fas fa-video text-muted"></i> {{current_video.title}}</a>
+                        {% else %}
+                        <p class="lead"><i class="fas fa-video text-muted"></i> {% trans "Video Not Found" %}</p>
+                        {% endif %}
+                        {% if curriculam.file %}
+                          <br>
+                          <a href="{{curriculam.fileURL}}" class="a_no_style lead"><i class="fas fa-file text-muted"></i>{% trans "Download File" %}</a>
+                        {% endif %}
+                      {% endwith %}
+                    {% else %}
+                      <a href="{{curriculam.fileURL}}" class="a_no_style lead"><i class="fas fa-file text-muted"></i>
+                      {% trans "Download File" %}</a> 
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% if request.user.profile.enrolled.all|enroll_contains:course.id %}
+            <div class="form-check ms-2 mt-4">
+              <form id="mark-course" class="d-flex align-items-center" data-url="{% url 'courses:MarkCourseComplete' %}" data-id="{{course.id}}">
+                {% csrf_token %}
+                <div class="me-2">
+                  <input class="checked form-check-input" type="checkbox" value="{{course.id}}" id="flexCheckDefault" {% if request.user.profile.finished.all|course_finished:course.id %} checked=true {% endif %}>
+                  <label class="form-check-label" for="flexCheckDefault">
+                    {% trans "Completed" %}
+                  </label>
+                </div>
+                  <input type="submit" value='{% trans "Confirm" %}' class="btn btn-success">
+              </form>
+            </div>
+            {% if request.user.profile.finished.all|course_finished:course.id and course.certificate%}
+              <div class="mt-4" id="claim-cert-cont">
+                <a href="{{course.get_certificate_url}}" class='w-100 btn btn-template'>{% trans "Claim Certificate" %}</a>
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+</article>
+{% comment %} <section class="mcqs-cont shadow-lg">
+
+</section> {% endcomment %}
+{% endblock body %}
+
+{% block ExtraJS %}
+  <script src="{% static 'js/enroll_course.js' %}"></script>
+{% endblock ExtraJS %}

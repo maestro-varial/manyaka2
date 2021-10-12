@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load socialaccount %}
+
+{% load crispy_forms_tags %}
+
+{% block ExtraCSS %}
+    <link href="{% static 'css/auth.css' %}" rel="stylesheet" type="text/css">
+{% endblock ExtraCSS %}
+
+{% block header %}
+    <div class="header-main" style="background-image: url({% get_media_prefix %}main/header.jpg);">
+        <header>
+          <h1>{% trans "Sign Up" %}</h1>
+          <p>{% trans "Sign Up sub-heading" %}</p>
+        </header>
+        <a href="#" class="btn btn-template">{% trans "Get Started Today" %}</a>
+    </div>
+{% endblock header %}
+
+{% block body %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="card cardbox">
+        <div class="card-header">{% trans "Sign Up" %}</div>
+        <div class="card-body">
+          <a class="btn btn-primary w-100 mb-5" href="{% provider_login_url 'google' %}">{% trans "Sign Up With Google" %}</a>
+          
+          <div class="form-group">
+
+            <form action="{% url 'users:signup_view' %}" method="post" role="form" class="form" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{form|crispy}}
+              {{profile_form|crispy}}
+              <input type="submit" value="Submit" class="btn btn-block btn-template mt-3">
+            </form>
+          </div>
+		  
+          <div class="login-or"><hr class="hr-or"></div>
+		  <!-- Links -->
+          <div class="bottom text-center">
+            {% trans "Already Registered" %}? <a href="{% url 'users:login_view' %}"><b>{% trans "Login" %}</b></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+
+
+
+
+{% endblock body %}
+
+{% block ExtraJS %}
+
+{% endblock ExtraJS %}

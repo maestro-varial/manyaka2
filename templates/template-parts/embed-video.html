@@ -1,0 +1,6 @@
+{% load embed_video_tags %}{% load i18n %}
+{% if video %}
+    {% video video.url 'small' %}
+{% else %}
+    <p class="lead"><i class="fas fa-video text-muted"></i> {% trans "Video Not Found" %}</p>
+{% endif %}
