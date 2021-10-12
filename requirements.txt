@@ -15,7 +15,7 @@ django-parler==2.2
 django-parler-rest==2.1
 django-rosetta==0.9.7
 djangorestframework==3.12.4
-fontawesome-free==5.15.4
+# fontawesome-free==5.15.4 fontawesome app name is incorrect
 future==0.18.2
 html5lib==1.1
 idna==3.2
