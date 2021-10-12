@@ -11,6 +11,7 @@ urlpatterns = [
     path('cat/<slug:slug>/', views.CategoryView, name="CategoryView"),
     path('course/<slug:slug>/', views.CourseDetailView, name="CourseDetailView"),
     path('course/enroll/<slug:slug>/', views.CourseEnrollView, name="CourseEnrollView"),
+    path('course/mcq/', views.ManageMCQView.as_view(), name="ManageMCQView"),
     # path('courses/enrolled/', views.EnrolledCoursesView, name="EnrolledCoursesView"),
 
     # --APIS--

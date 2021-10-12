@@ -127,16 +127,23 @@ class Course(TranslatableModel):
 
 class MCQ(TranslatableModel):
     course = models.ForeignKey('courses.Course', on_delete = models.CASCADE, related_name = 'mcqs')
-    completed = models.ManyToManyField("users.profile", related_name = 'completed_mcqs', blank=True)
+    serial_number = models.PositiveIntegerField()
     translations = TranslatedFields(
         title = models.CharField(max_length = 500),
-        option1 = models.CharField(max_length=150, help_text='This will be the correct option'),
-        option2 = models.CharField(max_length=150),
-        option3 = models.CharField(max_length=150),
     )
 
     def __str__(self):
         return f"MCQ for {self.course.title}"
+
+class McqOption(TranslatableModel):
+    mcq = models.ForeignKey("courses.MCQ", on_delete=models.CASCADE, related_name="options")
+    completed = models.ManyToManyField("users.profile", related_name = 'completed_mcqs', blank=True)
+    translations = TranslatedFields(
+        title = models.CharField(max_length = 300),
+    )
+
+    def __str__(self):
+        return f"Mcq_Option of {self.course.title}"
 
 class Curriculam(TranslatableModel):
     course = models.ForeignKey('courses.Course', on_delete = models.CASCADE, related_name = 'curriculams')

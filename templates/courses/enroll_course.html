@@ -142,11 +142,51 @@
       </div>
     </div>
 </article>
-{% comment %} <section class="mcqs-cont shadow-lg">
+<section class="mcqs-cont shadow-lg hidden">
 
-</section> {% endcomment %}
+</section>
 {% endblock body %}
 
 {% block ExtraJS %}
   <script src="{% static 'js/enroll_course.js' %}"></script>
+
+  <script>
+    let mcqs_cont = document.querySelector('.mcqs-cont');
+    let mcq_form = document.querySelector('#mcq_form');
+
+    mcq_form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (loading()) return;
+      const url = event.target.getAttribute('data-url')
+      const csrfToken = document.querySelector("input[name='csrfmiddlewaretoken']").value
+      const formData = new FormData(event.target)
+      loading(true);
+
+      $.ajax({
+        url: url,
+        dataType: "json",
+        headers: { "X-CSRFToken": csrfToken },
+        type: "Post",
+        async: true,
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (res) {
+            console.log(res)
+            if (res.status == 200){
+                popUp('{% trans "Mcq Submited" %}!')
+                window.location.reload()
+            }
+            loading(false);
+        },
+        error: function (err) {
+            console.log(err)
+            popUp('{% trans "Mcq Incorrect" %}!')
+            loading(false);
+        }
+      });
+    });
+
+  </script>
+
 {% endblock ExtraJS %}
