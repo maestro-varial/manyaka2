@@ -91,8 +91,12 @@ class Course(TranslatableModel):
     )
 
     def __str__(self):
-        return self.title    
-        
+        try:
+            return f"{self.title}"
+        except:
+            return f"{self.id}"
+
+
     def get_rating(self):
         total = sum(int(review['stars']) for review in self.reviews.all().values() )
         if self.reviews.count():
@@ -127,23 +131,24 @@ class Course(TranslatableModel):
 
 class MCQ(TranslatableModel):
     course = models.ForeignKey('courses.Course', on_delete = models.CASCADE, related_name = 'mcqs')
-    serial_number = models.PositiveIntegerField()
+    completed = models.ManyToManyField("users.profile", related_name = 'completed_mcqs', blank=True)
+    serial_number = models.PositiveIntegerField(default=0)
     translations = TranslatedFields(
         title = models.CharField(max_length = 500),
     )
 
     def __str__(self):
-        return f"MCQ for {self.course.title}"
+        return f"MCQ({self.serial_number}) for {self.course}"
 
 class McqOption(TranslatableModel):
     mcq = models.ForeignKey("courses.MCQ", on_delete=models.CASCADE, related_name="options")
-    completed = models.ManyToManyField("users.profile", related_name = 'completed_mcqs', blank=True)
+    correct = models.BooleanField(default=False)
     translations = TranslatedFields(
         title = models.CharField(max_length = 300),
     )
 
     def __str__(self):
-        return f"Mcq_Option of {self.course.title}"
+        return f"Mcq_Option of {self.mcq.course}({self.mcq.serial_number})"
 
 class Curriculam(TranslatableModel):
     course = models.ForeignKey('courses.Course', on_delete = models.CASCADE, related_name = 'curriculams')

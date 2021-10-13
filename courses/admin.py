@@ -53,5 +53,14 @@ class ReviewsAdmin(admin.ModelAdmin):
 
 admin.site.register(Label,TranslatableAdmin)
 admin.site.register(Testimonial,TranslatableAdmin)
+admin.site.register(MCQ,TranslatableAdmin)
+# admin.site.register(McqOption,TranslatableAdmin)
+
+@admin.register(McqOption)
+class McqOptionAdmin(TranslatableAdmin):
+    list_display = ['__str__','correct','title']
+
+    class Meta:
+       model = McqOption
 # admin.site.register(Certificate)
 

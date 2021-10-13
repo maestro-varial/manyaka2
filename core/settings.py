@@ -26,9 +26,9 @@ SITE_ID = 1
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-bqy+is65o59_r$8(f+0l&n!186gm=4+tsi*2av-!6r&fhpx(g4'
+SECRET_KEY = 'django-insecure-bqy+is65o59_r$8(f+0l&n!186gm=4+tsi*2av-!6r&fhpx(g4'
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key()) # will lose all sessions and cookies if this is regenerated everytime
+# SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key()) # will lose all sessions and cookies if this is regenerated everytime
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -41,7 +41,7 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost,*").split
 
 
 # To check which db to use
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True"
 
 
 # Application definition
@@ -54,22 +54,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'storages',
     'rest_framework',
     'crispy_forms',
-    'fontawesome_free',
     'embed_video',
     'ckeditor',
     'rosetta',
     'parler',
-
-    'users',
-    'courses',
-    'ecommerce',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'users',
+    'courses',
+    'ecommerce',
 ]
 
 MIDDLEWARE = [
@@ -225,6 +225,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+
+
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
@@ -232,3 +235,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# from .cdn.conf import * #noqa

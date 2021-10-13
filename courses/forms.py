@@ -1,3 +1,4 @@
+from django import forms
 from django.forms.models import inlineformset_factory
 from .models import *
 from parler.forms import TranslatableModelForm
@@ -5,11 +6,61 @@ from parler.forms import TranslatableModelForm
 # inlines = [CurriculamInline, videoInline, featuresInline, faqInline , CertificateInline]
 
 # fields = "__all__"
+# class McqOptionFormset(TranslatableModelForm):
+#     class Meta:
+#         model = McqOption
+#         exclude = ['mcq']
+CORRECT_OPTION_CHOICES = [
+    ('1','1'),
+    ('2','2'),
+    ('3','3'),
+]
 
 class CreateMcqForm(TranslatableModelForm):
+    option1 = forms.CharField(max_length=200, required=True)
+    option2 = forms.CharField(max_length=200, required=True)
+    option3 = forms.CharField(max_length=200, required=True)
+    correct_option = forms.ChoiceField(choices=CORRECT_OPTION_CHOICES, required=True)
+
+
+    def pre_save(self, *args, **kwargs):
+        # instance = super().save(*args, **kwargs)
+
+        correct_option = self.cleaned_data.get('correct_option')
+        option1 = self.cleaned_data.get('option1')
+        option2 = self.cleaned_data.get('option2')
+        option3 = self.cleaned_data.get('option3')
+
+        if option1 and option2 and option3:
+            options = [
+                option1,
+                option2,
+                option3,
+            ]
+            # self.instance.save()
+            option_instances = []
+            for index, option in enumerate(options):
+                mcqOption = McqOption(
+                    mcq = self.instance,
+                    title = option
+                )
+                if int(correct_option) == index+1:
+                    mcqOption.correct = True
+                option_instances.append(mcqOption)
+            return option_instances
+        raise ValidationError("options not defined")
+
+    def save(self, *args, **kwargs):
+        option_instances = self.pre_save()
+        instance = super().save(*args, **kwargs)
+        # instance = super(MCQ, self).save(*args, **kwargs)
+
+        return instance, option_instances
+
     class Meta:
         model = MCQ
-        exclude = ['course','completed']
+        fields = ['title','option1','option2','option3','correct_option']
+        # exclude = ['course','completed']
 
 
 class CreateCourseForm(TranslatableModelForm):

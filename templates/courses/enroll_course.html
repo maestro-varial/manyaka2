@@ -120,21 +120,25 @@
           </div>
           {% endfor %}
           {% if request.user.profile.enrolled.all|enroll_contains:course.id %}
-            <div class="form-check ms-2 mt-4">
+            {% comment %} <div class="form-check ms-2 mt-4">
               <form id="mark-course" class="d-flex align-items-center" data-url="{% url 'courses:MarkCourseComplete' %}" data-id="{{course.id}}">
                 {% csrf_token %}
                 <div class="me-2">
-                  <input class="checked form-check-input" type="checkbox" value="{{course.id}}" id="flexCheckDefault" {% if request.user.profile.finished.all|course_finished:course.id %} checked=true {% endif %}>
+                  <input class="checked form-check-input" type="checkbox" value="{{course.id}}" id="flexCheckDefault" {% if request.user.profile.finished.all|enroll_contains:course.id %} checked=true {% endif %}>
                   <label class="form-check-label" for="flexCheckDefault">
                     {% trans "Completed" %}
                   </label>
                 </div>
                   <input type="submit" value='{% trans "Confirm" %}' class="btn btn-success">
               </form>
-            </div>
-            {% if request.user.profile.finished.all|course_finished:course.id and course.certificate%}
+            </div> {% endcomment %}
+            {% if request.user|mcqs_passed:course.id %}
               <div class="mt-4" id="claim-cert-cont">
                 <a href="{{course.get_certificate_url}}" class='w-100 btn btn-template'>{% trans "Claim Certificate" %}</a>
+              </div>
+            {% else %}
+              <div class="mt-4" id="take-test-cont">
+                <button class='w-100 btn btn-template'>{% trans "Take Test" %}</button>
               </div>
             {% endif %}
           {% endif %}
@@ -142,8 +146,21 @@
       </div>
     </div>
 </article>
-<section class="mcqs-cont shadow-lg hidden">
+<section class="mcqs-section hidden">
+  <div class="mcqs-cont shadow-lg d-flex justify-content-center align-items-center flex-column">
+    <h3 class="fs-3 lead mb-5">Select MCQ To Take:</h3>
+    <div>
+      {% for mcq in course.mcqs.all %}
+        {% if request.user|mcq_completed:mcq.id %}
+          <button data-id="{{mcq.id}}" class="mcq-btn btn btn-success mx-3">{{mcq.serial_number}}</button>
+        {% else %}
+          <button data-id="{{mcq.id}}" class="mcq-btn btn btn-danger mx-3">{{mcq.serial_number}}</button>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 
+  <button class="close-btn btn btn-danger">X</button>
 </section>
 {% endblock body %}
 
@@ -151,42 +168,100 @@
   <script src="{% static 'js/enroll_course.js' %}"></script>
 
   <script>
-    let mcqs_cont = document.querySelector('.mcqs-cont');
-    let mcq_form = document.querySelector('#mcq_form');
+    const mcqs_section = document.querySelector('.mcqs-section');
+    const take_test_btn = document.querySelector('#take-test-cont .btn');
+    mcqs_section.querySelector('.close-btn').addEventListener('click',()=>{
+      mcqs_section.classList.toggle("hidden",true)
+    })
+    take_test_btn.addEventListener('click',()=>{
+      mcqs_section.classList.toggle("hidden",false)
+    })
 
-    mcq_form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      if (loading()) return;
-      const url = event.target.getAttribute('data-url')
-      const csrfToken = document.querySelector("input[name='csrfmiddlewaretoken']").value
-      const formData = new FormData(event.target)
-      loading(true);
+    const mcqs_cont = document.querySelector('.mcqs-cont');
+    mcqs_cont.querySelectorAll('.mcq-btn').forEach(btn=>{
+      btn.addEventListener('click', (event)=>{
+        event.preventDefault();
+        if (loading()) return;
+        const mcq_id = event.target.getAttribute('data-id')
+        const csrfToken = document.querySelector("input[name='csrfmiddlewaretoken']").value
+        loading(true);
 
-      $.ajax({
-        url: url,
-        dataType: "json",
-        headers: { "X-CSRFToken": csrfToken },
-        type: "Post",
-        async: true,
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (res) {
-            console.log(res)
-            if (res.status == 200){
+        $.ajax({
+          url: "{% url 'courses:ManageMCQView' %}",
+          dataType: "json",
+          headers: { "X-CSRFToken": csrfToken },
+          type: "Get",
+          async: true,
+          data: {'mcq_id': mcq_id},
+          success: function (res) {
+              console.log(res)
+              if (res.status == 202){
+                popUp('{% trans "Mcq Loaded" %}!')
+              }
+              mcqs_cont.innerHTML = JSON.parse(res)
+              submitMCQ();
+              loading(false);
+          },
+          error: function (err) {
+              console.log(err)
+              popUp('{% trans "Mcq Not Found" %}!')
+              loading(false);
+          }
+        });
+      });
+    })
+  </script>
+
+
+  <script>
+    function submitMCQ(){
+      var mcqs_cont = document.querySelector('.mcqs-cont');
+      let mcq_form;
+      try{
+        mcq_form = document.querySelector('#mcq_form');
+      }catch(er){
+        console.log(er)
+      }
+      if (!mcq_form) return; 
+
+      mcq_form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (loading()) return;
+        const url = event.target.getAttribute('data-url')
+        const csrfToken = document.querySelector("input[name='csrfmiddlewaretoken']").value
+        const formData = new FormData(event.target)
+        loading(true);
+
+        $.ajax({
+          url: url,
+          dataType: "json",
+          headers: { "X-CSRFToken": csrfToken },
+          type: "Post",
+          async: true,
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (res) {
+              console.log(res)
+              if (res.status == 200){
                 popUp('{% trans "Mcq Submited" %}!')
                 window.location.reload()
-            }
-            loading(false);
-        },
-        error: function (err) {
-            console.log(err)
-            popUp('{% trans "Mcq Incorrect" %}!')
-            loading(false);
-        }
+              }
+              loading(false);
+          },
+          error: function (err) {
+              console.log(err)
+              if (err.status == 200){
+                popUp('{% trans "Mcq Submited" %}!')
+                window.location.reload()
+              }else{
+                popUp('{% trans "Mcq Incorrect" %}!')
+              }
+              loading(false);
+          }
+        });
       });
-    });
-
+    }
   </script>
 
 {% endblock ExtraJS %}

@@ -29,34 +29,34 @@ document.querySelectorAll('.video-change').forEach(element => {
   })
 });
 
-mark_form.addEventListener('submit', (event)=>{
-  event.preventDefault();
-  const url = mark_form.getAttribute('data-url');
-  const course_id = mark_form.querySelector('.checked').value
-  const isChecked = mark_form.querySelector('.checked').checked
-  const formData = new FormData(event.target);
-  formData.append('course_id',course_id)
-  formData.append('isChecked',isChecked)
+// mark_form.addEventListener('submit', (event)=>{
+//   event.preventDefault();
+//   const url = mark_form.getAttribute('data-url');
+//   const course_id = mark_form.querySelector('.checked').value
+//   const isChecked = mark_form.querySelector('.checked').checked
+//   const formData = new FormData(event.target);
+//   formData.append('course_id',course_id)
+//   formData.append('isChecked',isChecked)
 
-  $.ajax({
-    url: url,
-    dataType: "json",
-    type: "Post",
-    async: true,
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function(data) {
+//   $.ajax({
+//     url: url,
+//     dataType: "json",
+//     type: "Post",
+//     async: true,
+//     data: formData,
+//     processData: false,
+//     contentType: false,
+//     success: function(data) {
 
-      loading(false);
-      window.location.reload()
-    },
-    error: function(err) {
+//       loading(false);
+//       window.location.reload()
+//     },
+//     error: function(err) {
 
-      loading(false);
-      window.location.reload()
-    }
-  });
-})
+//       loading(false);
+//       window.location.reload()
+//     }
+//   });
+// })
 
 

@@ -30,7 +30,7 @@ from .forms import *
 # messages.error(request, 'Error is this')
 
 def HomeView(request):
-    courses = Course.objects.all()[:15]
+    courses = Course.objects.all().order_by('-id')[:15]
     context = {'courses': courses}
     return render(request,"courses/home.html", context)
 
@@ -146,7 +146,6 @@ class SearchViewApi(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
 # TODO:
 class CreateCourseAPI(APIView):
     permission_classes = (IsAuthenticated,IsTeacher)
@@ -209,6 +208,7 @@ class CreateCourseView(View):
             course = course_form.save(commit=False)
             course.author = request.user.profile
             course.save()
+
             for cat in course_form.cleaned_data['category']:
                 course.category.add(cat)
 
@@ -233,14 +233,25 @@ class CreateCourseView(View):
                 faq.course = course
                 faq.save()
 
-            mcqs = mcq_form.save(commit=False)
-            for mcq in mcqs:
-                mcq.course = course
-                mcq.save()
+            # options = [
+            #     mcq_form.cleaned_data.get('option1'),
+            #     mcq_form.cleaned_data.get('option2'),
+            #     mcq_form.cleaned_data.get('option3'),
+            # ]
             
             certificate = certificate_form.save(commit=False)
             certificate.course = course
             certificate.save()
+
+            mcqs = mcq_form.save(commit=False)
+            for index, mcq_data in enumerate(mcqs):
+                mcq, option_instances = mcq_data
+                mcq.serial_number = index+1
+                mcq.course = course
+                mcq.save()
+                # option_instances = mcq.pre_save()
+                for option in option_instances:
+                    option.save()
 
             messages.success(request, 'Your Course was successfully Created!')
             return render(request, 'courses/create-course-form.html', context)
@@ -249,19 +260,29 @@ class CreateCourseView(View):
         return render(request, 'courses/create-course-form.html', context)
 
 
+class ManageMCQView(APIView):
+    permission_classes = (IsAuthenticated,)
 
-
-class ManageMCQView(View):
     def get(self, request, *args, **kwargs):
-        mcq_serial = request.GET.get('mcq_serial')
-        course_id = request.GET.get('course_id')
+        mcq_id = request.GET.get('mcq_id')
+        mcq = MCQ.objects.get(id=mcq_id)
+        context = {'mcq':mcq}
+        res = render_to_string('template-parts/course-mcq.html',context)
+        if not res.strip():
+            Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(json.dumps(res.strip()),status=status.HTTP_202_ACCEPTED)
 
-        course = Course.objects.get(id = course_id)
-        MCQ.objects.get()
-        
     def post(self, request, *args, **kwargs):
-        pass
-
+        mcq_id = request.POST.get('mcq_id')
+        selected_option_id = request.POST.get('options')
+        mcq = MCQ.objects.get(id=mcq_id)
+        mcqOption = McqOption.objects.get(id=selected_option_id)
+        if mcqOption in  mcq.options.all():
+            if mcqOption.correct:
+                mcq.completed.add(request.user.profile)
+                mcq.save()
+                return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 class GenerateCertificateView(View):
