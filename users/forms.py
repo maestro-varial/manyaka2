@@ -22,14 +22,3 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = '__all__'
         exclude = ['user','enrolled','finished']
-
-    def save(self):
-        p = super().save()
-
-        img = Image.open(p.profile_pic.path) # Open image
-        
-        # resize image
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size) # Resize image
-            img.save(p.profile_pic.path) # Save it again and override the larger image

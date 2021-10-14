@@ -28,7 +28,7 @@ def signup_view(request):
             if profile_form.is_valid():
                 print('valid')
                 profile_form.save()
-            login(request, user)
+            login(request, user, backend="django.contrib.auth.backends.ModelBackend")
             messages.success(request, 'Profile Created Successfully.')
             return HttpResponseRedirect(reverse('courses:HomeView'))
         return render(request, 'auth/signup.html', {'form': form, 'profile_form': profile_form})
