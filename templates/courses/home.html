@@ -8,7 +8,7 @@
 {% endblock ExtraCSS %}
 
 {% block header %}
-    <div class="header-main" style="background-image: url({% get_media_prefix %}main/header.jpg);">
+    <div class="header-main" style="background-image: url({{headerImg.image.url}});">
         <header>
           <h1>{% trans "Header Heading" %}</h1>
           <p>{% trans "Header Sub-Heading" %}</p>

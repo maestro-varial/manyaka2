@@ -1,4 +1,5 @@
 from django.utils.translation import get_language
+import random
 from .models import *
 
 
@@ -11,8 +12,9 @@ def menu_links(request):
     return dict(footcategories=footcategories, catg_parent=catg_parent, links={})
 
 def home_page(request):
+    headerImg = HeaderImg.objects.order_by('?').first()
     testimonials = Testimonial.objects.all()[:3]
-    return dict(testimonials=testimonials)
+    return dict(testimonials=testimonials,headerImg=headerImg)
 
 # def cart_total(request):
 #     if request.user.is_authenticated:

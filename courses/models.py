@@ -239,3 +239,11 @@ class Testimonial(TranslatableModel):
 
     def __str__(self):
         return f"Testimonial of ({self.name})"
+
+
+class HeaderImg(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='main/')
+
+    def __str__(self):
+        return f"Header Image ({self.title})"

@@ -54,6 +54,7 @@ class ReviewsAdmin(admin.ModelAdmin):
 admin.site.register(Label,TranslatableAdmin)
 admin.site.register(Testimonial,TranslatableAdmin)
 admin.site.register(MCQ,TranslatableAdmin)
+admin.site.register(HeaderImg)
 # admin.site.register(McqOption,TranslatableAdmin)
 
 @admin.register(McqOption)
