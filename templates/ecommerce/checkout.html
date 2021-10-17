@@ -13,7 +13,7 @@
           <h1>{% trans "Proceed To Checkout" %}</h1>
           <p>{% trans "Checkout sub-heading" %}</p>
         </header>
-        <a href="#" class="btn btn-template">{% trans "Get Started Today" %}</a>
+        <a href="{% url 'courses:AllCoursesView' %}" class="btn btn-template">{% trans "Get Started Today" %}</a>
     </div>
 {% endblock header %}
 
@@ -32,7 +32,7 @@
                     <h6 class="my-0">{{item.referring_course.title}}</h6>
                     <small class="text-muted">{{item.referring_course.meta_desc}}</small>
                 </div>
-                <span class="text-muted">${{item.referring_course.get_price}}</span>
+                <span class="text-muted">FCFA{{item.referring_course.get_price}}</span>
             </li>
             {% endfor %}
             {% if order.coupon_valid %}
@@ -41,12 +41,12 @@
                     <h6 class="my-0">{% trans "Promo code" %}</h6>
                     <small>{{order.coupon}}</small>
                     </div>
-                    <span class="text-success">−${{order.coupon.amount}}</span>
+                    <span class="text-success">−FCFA{{order.coupon.amount}}</span>
                 </li>
             {% endif %}
             <li class="list-group-item d-flex justify-content-between">
                 <span>{% trans "Total Price" %}</span>
-                <strong>${{order.get_cart_total}}</strong>
+                <strong>FCFA{{order.get_cart_total}}</strong>
             </li>
             </ul>
 

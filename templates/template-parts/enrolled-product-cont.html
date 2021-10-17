@@ -12,10 +12,10 @@
                 <h5><a href="{{course.get_absolute_url}}" class="a_no_style">{{course.title}}</a></h5>
                 <ul class="product_price list-unstyled">
                     {% if course.discount > 0 %}
-                        <li class="old_price text-decoration-line-through">{{course.initial_price}}$</li>
-                        <li class="new_price">{{course.get_price}}$</li>
+                        <li class="old_price text-decoration-line-through">{{course.initial_price}}FCFA</li>
+                        <li class="new_price">{{course.get_price}}FCFA</li>
                     {% else %}
-                        <li class="old_price">{{course.get_price}}$</li>
+                        <li class="old_price">{{course.get_price}}FCFA</li>
                     {% endif %}
                 </ul>
             </div>

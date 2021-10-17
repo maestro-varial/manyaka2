@@ -78,6 +78,7 @@ class Course(TranslatableModel):
     initial_price = models.IntegerField(default = 0)
     discount = models.IntegerField(default = 0, help_text = "Discount in percent")
     maincourse = models.ManyToManyField(Label, blank = True, related_name = 'posts')
+    approved = models.BooleanField(default=False)
     translations = TranslatedFields(
         title = models.CharField(max_length = 500),
         meta_tags = models.CharField(max_length = 2000, blank = True),

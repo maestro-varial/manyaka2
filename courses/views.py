@@ -1,7 +1,7 @@
 import json
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
-from django.http.response import HttpResponse, JsonResponse
+from django.http.response import Http404, HttpResponse, HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import render,get_object_or_404, HttpResponseRedirect
 from django.template.loader import get_template, render_to_string
 from django.urls import reverse
@@ -30,12 +30,12 @@ from .forms import *
 # messages.error(request, 'Error is this')
 
 def HomeView(request):
-    courses = Course.objects.all().order_by('-id')[:15]
+    courses = Course.objects.filter(approved=True).order_by('-id')[:15]
     context = {'courses': courses}
     return render(request,"courses/home.html", context)
 
 def AllCoursesView(request):
-    courses = Course.objects.all()
+    courses = Course.objects.filter(approved=True)
     context = {'courses': courses}
     return render(request,"courses/list_courses.html", context)
 
@@ -46,17 +46,37 @@ def AllCoursesView(request):
 #     return render(request,"courses/enrolled-courses.html", context)
 
 def CategoryView(request, slug):
-    category = Category.objects.get(translations__slug = slug)
+    category = Category.objects.get(translations__slug = slug,approved=True)
     courses = category.courses.all()
     context = {'courses': courses, 'category': category}
     return render(request,"courses/list_courses.html", context)
 
+
+def ApproveCourses(request):
+    if request.method == "GET":
+        if request.user.is_staff:
+            return render(request,"courses/approve_courses.html")
+        return HttpResponse(status=404)
+
+class ChangeApproved(View):
+    def post(self,request):
+        if request.user.is_staff:
+            course_id = request.POST.get('course_id')
+            course = get_object_or_404(Course, id = course_id)
+            course.approved = True
+            course.save()
+            return HttpResponse(status=200)
+        return HttpResponse(status=403)
+
 def CourseDetailView(request, slug):
     # course = Course.objects.get(translations__slug=slug)
     course = get_object_or_404(Course, translations__slug = slug)
-    
     context = {'course': course}
-    return render(request,"courses/detail_course.html", context)
+    if course.approved:
+        return render(request,"courses/detail_course.html", context)
+    elif request.user.is_staff:
+        return render(request,"courses/detail_course.html", context)
+    return HttpResponse(status=404)
 
 # class CourseDetailView(TranslatableSlugMixin, DetailView):
 #     model = Course

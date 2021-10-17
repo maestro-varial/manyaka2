@@ -14,7 +14,8 @@ def menu_links(request):
 def home_page(request):
     headerImg = HeaderImg.objects.order_by('?').first()
     testimonials = Testimonial.objects.all()[:3]
-    return dict(testimonials=testimonials,headerImg=headerImg)
+    toBeApproved = Course.objects.filter(approved=False)
+    return dict(testimonials=testimonials,headerImg=headerImg,toBeApproved=toBeApproved)
 
 # def cart_total(request):
 #     if request.user.is_authenticated:

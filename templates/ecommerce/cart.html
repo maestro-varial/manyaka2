@@ -13,7 +13,7 @@
           <h1>{% trans "Your Cart" %}</h1>
           <p>{% trans "Cart sub-heading" %}</p>
         </header>
-        <a href="#" class="btn btn-template">{% trans "Get Started Today" %}</a>
+        <a href="{% url 'courses:AllCoursesView' %}" class="btn btn-template">{% trans "Get Started Today" %}</a>
     </div>
 {% endblock header %}
 
@@ -31,9 +31,9 @@
                             <div class="media-body pt-3">
                                 <h3 class="product-card-title font-weight-semibold border-0 pb-0"><a href="{{item.referring_course.get_absolute_url}}">{{item.referring_course.title}}</a></h3>
                                 {% if item.referring_course.discount %}
-                                    <div class="font-size-sm"><span class="text-muted mr-2">{% trans "Price" %}:</span><span class="text-danger mr-2 text-decoration-line-through">{{item.referring_course.initial_price}}$</span><span class="text-success">{{item.referring_course.get_price}}$</span></div>
+                                    <div class="font-size-sm"><span class="text-muted mr-2">{% trans "Price" %}:</span><span class="text-danger mr-2 text-decoration-line-through">{{item.referring_course.initial_price}}FCFA</span><span class="text-success">{{item.referring_course.get_price}}FCFA</span></div>
                                 {% else %}
-                                    <div class="font-size-sm"><span class="text-muted mr-2">{% trans "Price" %}:</span>{{item.referring_course.initial_price}}$</div>
+                                    <div class="font-size-sm"><span class="text-muted mr-2">{% trans "Price" %}:</span>{{item.referring_course.initial_price}}FCFA</div>
                                 {% endif %}
                             </div>
                         </div>

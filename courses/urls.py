@@ -12,6 +12,8 @@ urlpatterns = [
     path('course/<slug:slug>/', views.CourseDetailView, name="CourseDetailView"),
     path('course/enroll/<slug:slug>/', views.CourseEnrollView, name="CourseEnrollView"),
     path('course/mcq', views.ManageMCQView.as_view(), name="ManageMCQView"),
+    path('course/to_be_approved', views.ApproveCourses, name="ApproveCourses"),
+    path('course/approve', views.ChangeApproved.as_view(), name="ChangeApproved"),
     # path('courses/enrolled/', views.EnrolledCoursesView, name="EnrolledCoursesView"),
 
     # --APIS--

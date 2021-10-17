@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block ExtraCSS %}
+    <link href="{% static 'css/home.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/cart.css' %}" rel="stylesheet" type="text/css">
+{% endblock ExtraCSS %}
+
+{% block header %}
+    <div class="header-main" style="background-image: url({{headerImg.image.url}});">
+        <header>
+          <h1>{% trans "Approve Courses" %}</h1>
+          <p>{% trans "Approve Courses sub-heading" %}</p>
+        </header>
+        <a href="{% url 'courses:AllCoursesView' %}" class="btn btn-template">{% trans "Get Started Today" %}</a>
+    </div>
+{% endblock header %}
+
+{% block body %}
+<article class="container">
+    <div class="container pb-5 mt-n2 mt-md-n3">
+        <div class="row">
+            <div class="col">
+                <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-dark border-radius-2"><span class="text-light">{% trans "Courses To Pending Approve" %} ({{toBeApproved.count}})</span><a class="a_no_style text-template font-size-sm" href="{% url 'courses:HomeView' %}">{% trans "Continue Learning" %}</a></h2>
+                <!-- course -->
+                {% for course in toBeApproved %}
+                    <div class="d-sm-flex justify-content-between my-4 pb-4 border-bottom">
+                        <div class="media d-block d-sm-flex text-center text-sm-left">
+                            <a class="cart-item-thumb mx-auto me-sm-4" href="{{course.get_absolute_url}}"><img src="{{course.imageURL}}" alt="{{course}} Thumb"></a>
+                            <div class="media-body pt-3">
+                                <h3 class="product-card-title font-weight-semibold border-0 pb-0"><a href="{{course.get_absolute_url}}">{{course.title}}</a></h3>
+                                {% if course.discount %}
+                                    <div class="font-size-sm"><span class="text-muted mr-2">{% trans "Price" %}:</span><span class="text-danger mr-2 text-decoration-line-through">{{course.initial_price}}FCFA</span><span class="text-success">{{course.get_price}}FCFA</span></div>
+                                {% else %}
+                                    <div class="font-size-sm"><span class="text-muted mr-2">{% trans "Price" %}:</span>{{course.initial_price}}FCFA</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
+                            <button class="btn btn-outline-success btn-sm btn-block mb-2 approve-course-btn" type="button" data-action="approve" data-id="{{course.id}}" data-url="{% url 'courses:ChangeApproved' %}">
+                                <i class="fas fa-thumbs-up me-2"></i>{% trans "Approve" %}
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock body %}
+
+{% block ExtraJS %}
+<script src="{% static 'js/manage_course.js' %}"></script>
+{% endblock ExtraJS %}

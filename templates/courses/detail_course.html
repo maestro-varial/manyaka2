@@ -14,7 +14,7 @@
           <h1>{{course.title}}</h1>
           <p>{{course.meta_desc}}</p>
         </header>
-        <a href="#" class="btn btn-template">{% trans "Get Started Today" %}</a>
+        <a href="{% url 'courses:AllCoursesView' %}" class="btn btn-template">{% trans "Get Started Today" %}</a>
     </div>
 {% endblock header %}
 
@@ -129,11 +129,11 @@
                           <li class="mb-2">
                             {% if course.discount > 0 %}
                                 <li>{% trans "Price" %}: 
-                                  <span class="text-decoration-line-through text-danger">{{course.initial_price}}$</span>
-                                  <span class="text-success">{{course.get_price}}$</span>
+                                  <span class="text-decoration-line-through text-danger">{{course.initial_price}}FCFA</span>
+                                  <span class="text-success">{{course.get_price}}FCFA</span>
                                 </li>
                             {% else %}
-                                <li><p>Price: <span class="text-success">{{course.initial_price}}$</span></p></li>
+                                <li><p>Price: <span class="text-success">{{course.initial_price}}FCFA</span></p></li>
                             {% endif %}
                           </li>
                           <li class="text-center mt-4">

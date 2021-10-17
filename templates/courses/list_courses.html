@@ -13,7 +13,7 @@
           <h1>{% trans "List Courses Heading" %}</h1>
           <p>{% trans "List Courses sub-Heading" %}</p>
         </header>
-        <a href="#" class="btn btn-template">{% trans "Get Started Today" %}</a>
+        <a href="{% url 'courses:AllCoursesView' %}" class="btn btn-template">{% trans "Get Started Today" %}</a>
     </div>
 {% endblock header %}
 

@@ -432,3 +432,21 @@
 .text-template {
   color: var(--primary-dark);
 }
+
+.to-be-approved{
+  position: fixed; top: 50px; left: 0px;
+  border-left: 3px solid var(--primary-dark);
+  background-color: rgba(33,37,41)!important;
+  user-select: none;
+  width: 220px;
+  height: 30px;
+  z-index:1000;
+}
+.to-be-approved p{
+  margin:0;
+}
+.to-be-approved span{
+  padding:3px;
+  background-color: green;
+  border-radius: 50%;
+}

@@ -8,7 +8,7 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/">{% trans "E-Learning" %}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <i class="fas fa-bars" style="color: #fff;"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
@@ -28,7 +28,7 @@
   
         <li class="nav-item px-lg-2">
           <form action="{% url 'courses:SearchView' %}" method='get' class="d-flex">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+            <input class="form-control mr-sm-2" type="search" placeholder="{% trans 'Search' %}" aria-label="Search" name="q">
             <button class="btn btn-outline-secondary btn-sm" type="submit">{% trans "Search" %}</button>
           </form>
         </li>
@@ -108,7 +108,13 @@
     </div>
   </nav>
 </div>
-
+{% if request.user.is_superuser %}
+<div class="to-be-approved d-flex justify-content-center align-items-center">
+  <a href="{% url 'courses:ApproveCourses' %}" class="a_no_style">
+    <p class="m-0 d-inline text-light">To Be Approved Courses <span>{{toBeApproved.count}}</span></p>
+  </a>
+</div>
+{% endif %}
 
 {% if messages %}
   {% for message in messages %}
