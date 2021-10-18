@@ -44,4 +44,50 @@
 
 {% block ExtraJS %}
 <script src="{% static 'js/base-settings.js' %}"></script>
+<script>
+function submitProfileEditForm(elem){
+    let form_id = elem.getAttribute('data-form')
+    console.log(form_id)
+    let form = document.getElementById(form_id)
+
+    form.addEventListener("submit", (event)=>{
+        event.preventDefault()
+
+        const url = event.target.getAttribute('data-url')
+        const csrfToken = document.querySelector("input[name='csrfmiddlewaretoken']").value
+        const formData = new FormData(event.target)
+        if (loading()) return;
+
+        loading(true);
+
+        $.ajax({
+            url: url,
+            dataType: "json",
+            headers: { "X-CSRFToken": csrfToken },
+            type: "Post",
+            async: true,
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                console.log(res)
+                if (res.status == 200){
+                    popUp('{% trans "Profile Updated Success Fully" %}!')
+                    window.location.reload()
+                }
+                loading(false);
+            },
+            error: function (err) {
+                console.log(err)
+                if (err.status == 200){
+                    popUp('{% trans "Something went wrong" %}!')
+                    window.location.reload()
+                }
+                loading(false);
+            }
+        });
+    })
+    form.querySelector("input[type='submit']").click()
+}
+</script>
 {% endblock ExtraJS %}

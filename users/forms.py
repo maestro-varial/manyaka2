@@ -22,3 +22,20 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = '__all__'
         exclude = ['user','enrolled','finished']
+
+class UpdateUserForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=100 ,label='Enter FirstName',required=False)
+    last_name = forms.CharField(max_length=100 ,label='Enter LastName',required=False)
+    # username = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(required=True,widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ['first_name','last_name', 'username', 'email']
+
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        exclude = ['user','enrolled','finished']

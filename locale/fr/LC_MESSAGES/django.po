@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-09 04:34+0000\n"
-"PO-Revision-Date: 2021-10-09 04:48+0000\n"
+"PO-Revision-Date: 2021-10-18 10:40+0000\n"
 "Last-Translator:   <aneeq@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -29,11 +29,11 @@ msgstr "Français"
 
 #: templates/auth/login.html:14
 msgid "Sign In"
-msgstr ""
+msgstr "Connexion"
 
 #: templates/auth/login.html:15
 msgid "Sign In sub-heading"
-msgstr ""
+msgstr "Continuez votre parcours"
 
 #: templates/auth/login.html:17 templates/auth/signup.html:18
 #: templates/base.html:31 templates/courses/detail_course.html:16
@@ -41,184 +41,182 @@ msgstr ""
 #: templates/courses/search.html:15 templates/ecommerce/cart.html:15
 #: templates/ecommerce/checkout.html:15
 msgid "Get Started Today"
-msgstr "changed"
+msgstr "Démarrer"
 
 #: templates/auth/login.html:29 templates/template-parts/top-navbar.html:56
 msgid "Log In"
-msgstr ""
+msgstr "Connexion"
 
 #: templates/auth/login.html:31
 msgid "Log In With Google"
-msgstr ""
+msgstr "Connexion via google (recommandée)"
 
 #: templates/auth/login.html:44
 msgid "Don't have an account"
-msgstr ""
+msgstr "Vous n’avez pas de compte ?"
 
 #: templates/auth/login.html:44 templates/auth/signup.html:15
 #: templates/auth/signup.html:30 templates/template-parts/top-navbar.html:53
 msgid "Sign Up"
-msgstr ""
+msgstr "Création de compte"
 
 #: templates/auth/signup.html:16
 msgid "Sign Up sub-heading"
-msgstr ""
+msgstr "Commencez votre parcours"
 
 #: templates/auth/signup.html:32
 msgid "Sign Up With Google"
-msgstr ""
+msgstr "Inscription via google (recommandée)"
 
 #: templates/auth/signup.html:47
 msgid "Already Registered"
-msgstr ""
+msgstr "Déjà inscrit(e)"
 
 #: templates/auth/signup.html:47
 msgid "Login"
-msgstr ""
+msgstr "Connexion"
 
 #: templates/base.html:28 templates/courses/home.html:13
 msgid "Header Heading"
-msgstr "To Something Else"
+msgstr "Cours pratiques pour démarrer un business"
 
 #: templates/base.html:29 templates/courses/home.html:14
 msgid "Header Sub-Heading"
-msgstr "lorem lipsum"
+msgstr "Tous les prix sont en Fcfa (1Fcfa=0,0015€)"
 
 #: templates/courses/create-course-form.html:22
 #: templates/template-parts/base-settings.html:29
 msgid "Create Course"
-msgstr ""
+msgstr "Ajouter un cours/une formation"
 
 #: templates/courses/create-course-form.html:30
 msgid "Curriculams"
-msgstr ""
+msgstr "Curriculums"
 
 #: templates/courses/create-course-form.html:35
 #: templates/courses/create-course-form.html:44
 #: templates/courses/create-course-form.html:53
 #: templates/courses/create-course-form.html:62
 msgid "Add More"
-msgstr ""
+msgstr "Ajouter encore"
 
 #: templates/courses/create-course-form.html:39
 msgid "Videos"
-msgstr ""
+msgstr "Vidéos"
 
 #: templates/courses/create-course-form.html:48
 msgid "Features"
-msgstr ""
+msgstr "Caractéristiques"
 
 #: templates/courses/create-course-form.html:57
 #: templates/courses/create-course-form.html:66
 msgid "Faqs"
-msgstr ""
+msgstr "FAQ"
 
 #: templates/courses/detail_course.html:41
 #: templates/courses/enroll_course.html:84
 msgid "Syllabus"
-msgstr ""
+msgstr "Programme"
 
 #: templates/courses/detail_course.html:64
 #: templates/courses/enroll_course.html:109
 #: templates/template-parts/embed-404.html:3
 #: templates/template-parts/embed-video.html:5
 msgid "Video Not Found"
-msgstr ""
+msgstr "Vidéo introuvable"
 
 #: templates/courses/detail_course.html:68
 #: templates/courses/enroll_course.html:113
 #: templates/courses/enroll_course.html:118
 msgid "Download File"
-msgstr ""
+msgstr "Télécharger"
 
 #: templates/courses/detail_course.html:81
 #: templates/courses/enroll_course.html:41
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: templates/courses/detail_course.html:86
 #: templates/courses/enroll_course.html:46
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: templates/courses/detail_course.html:95
 #: templates/courses/enroll_course.html:55
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Foire Aux Questions"
 
 #: templates/courses/detail_course.html:131
 msgid "Online Access"
-msgstr ""
+msgstr "Accès en ligne"
 
 #: templates/courses/detail_course.html:131
 msgid "True"
-msgstr ""
+msgstr "Vrai"
 
 #: templates/courses/detail_course.html:135 templates/ecommerce/cart.html:33
 #: templates/ecommerce/cart.html:35
 msgid "Price"
-msgstr ""
+msgstr "Prix"
 
 #: templates/courses/detail_course.html:144
-#, fuzzy
 #| msgid "Top-selling Courses"
 msgid "Enroll Now"
-msgstr "Cours les plus vendus"
+msgstr "Suivre le cours"
 
 #: templates/courses/detail_course.html:160
 msgid "Ratings and Reviews"
-msgstr ""
+msgstr "Notes & Avis"
 
 #: templates/courses/detail_course.html:167
 msgid "Rated"
-msgstr ""
+msgstr "Evalué"
 
 #: templates/courses/detail_course.html:167
 msgid "out of"
-msgstr ""
+msgstr "Hors de"
 
 #: templates/courses/detail_course.html:172
 msgid "Leave Comment"
-msgstr ""
+msgstr "Laisser un avis"
 
 #: templates/courses/detail_course.html:177
 msgid "Stars"
-msgstr ""
+msgstr "Etoiles"
 
 #: templates/courses/detail_course.html:187
-#, fuzzy
 #| msgid "Top-selling Courses"
 msgid "Your Comment"
-msgstr "Cours les plus vendus"
+msgstr "Votre avis"
 
 #: templates/courses/detail_course.html:191
 msgid "Submit Comment"
-msgstr ""
+msgstr "Envoyer un avis"
 
 #: templates/courses/detail_course.html:197
 msgid "All Ratings and Reviews"
-msgstr ""
+msgstr "Toutes les revues et notes"
 
 #: templates/courses/detail_course.html:198
 msgid "Reviews"
-msgstr ""
+msgstr "Revues"
 
 #: templates/courses/detail_course.html:251
 #: templates/courses/detail_course.html:257
 msgid "Review Submited"
-msgstr ""
+msgstr "Revue envoyée"
 
 #: templates/courses/enroll_course.html:133
 msgid "Completed"
-msgstr ""
+msgstr "Terminé"
 
 #: templates/courses/enroll_course.html:136
 msgid "Confirm"
-msgstr ""
+msgstr "Valider"
 
 #: templates/courses/enroll_course.html:141
 msgid "Claim Certificate"
-msgstr ""
+msgstr "Télécharger le certificat"
 
 #: templates/courses/home.html:24
 msgid "Top-selling Courses"
@@ -226,241 +224,238 @@ msgstr "Cours les plus vendus"
 
 #: templates/courses/home.html:39
 msgid "What People Say About Us"
-msgstr "Que disent les gens à notre propos"
+msgstr "Ce qu’ils disent"
 
 #: templates/courses/list_courses.html:12
 msgid "List Courses Heading"
-msgstr ""
+msgstr "Liste des cours/formations"
 
 #: templates/courses/list_courses.html:13
 msgid "List Courses sub-Heading"
-msgstr ""
+msgstr "Liste des cours/formations disponibles"
 
 #: templates/courses/list_courses.html:22 templates/courses/search.html:21
 #: templates/template-parts/enrolled-courses.html:5
 #: templates/template-parts/my-courses.html:5
 msgid "Found"
-msgstr ""
+msgstr "Trouvé(s)"
 
 #: templates/courses/list_courses.html:22 templates/courses/search.html:21
 #: templates/ecommerce/cart.html:24
 #: templates/template-parts/enrolled-courses.html:5
 #: templates/template-parts/my-courses.html:5
-#, fuzzy
 #| msgid "Top-selling Courses"
 msgid "Courses"
-msgstr "Cours les plus vendus"
+msgstr "Cours/Formations"
 
 #: templates/courses/search.html:12
 msgid "Searched For"
-msgstr ""
+msgstr "Recherché(s)"
 
 #: templates/ecommerce/cart.html:12
-#, fuzzy
 #| msgid "Top-selling Courses"
 msgid "Your Cart"
-msgstr "Cours les plus vendus"
+msgstr "Votre panier"
 
 #: templates/ecommerce/cart.html:13
 msgid "Cart sub-heading"
-msgstr ""
+msgstr "Payez pour avoir un accès illimité"
 
 #: templates/ecommerce/cart.html:24
 msgid "Continue Learning"
-msgstr ""
+msgstr "Continuer à apprendre"
 
 #: templates/ecommerce/cart.html:42
 msgid "Remove"
-msgstr ""
+msgstr "Supprimer"
 
 #: templates/ecommerce/cart.html:48 templates/ecommerce/checkout.html:12
 msgid "Proceed To Checkout"
-msgstr ""
+msgstr "Payer"
 
 #: templates/ecommerce/checkout.html:13
 msgid "Checkout sub-heading"
-msgstr ""
+msgstr "Terminez votre paiement"
 
 #: templates/ecommerce/checkout.html:24
 msgid "Your cart"
-msgstr ""
+msgstr "Votre panier"
 
 #: templates/ecommerce/checkout.html:40
 msgid "Promo code"
-msgstr ""
+msgstr "Code promo"
 
 #: templates/ecommerce/checkout.html:47
 msgid "Total Price"
-msgstr ""
+msgstr "Total"
 
 #: templates/ecommerce/checkout.html:56
 msgid "Redeem"
-msgstr ""
+msgstr "Appliquer"
 
 #: templates/ecommerce/checkout.html:61
 msgid "Payment"
-msgstr ""
+msgstr "Paiement"
 
 #: templates/ecommerce/checkout.html:67
 msgid "Credit card"
-msgstr ""
+msgstr "Carte de paiement"
 
 #: templates/ecommerce/checkout.html:71
 msgid "Debit card"
-msgstr ""
+msgstr "Carte de paiement"
 
 #: templates/ecommerce/checkout.html:75
 msgid "PayPal"
-msgstr ""
+msgstr "Paypal"
 
 #: templates/ecommerce/checkout.html:81
 msgid "Name on card"
-msgstr ""
+msgstr "Nom du propriétaire"
 
 #: templates/ecommerce/checkout.html:83
 msgid "Full name as displayed on card"
-msgstr ""
+msgstr "Nom complet du propriétaire"
 
 #: templates/ecommerce/checkout.html:85
 msgid "Name on card is required"
-msgstr ""
+msgstr "Nom du propriétaire requis"
 
 #: templates/ecommerce/checkout.html:90
 msgid "Credit card number"
-msgstr ""
+msgstr "Numéro de la carte"
 
 #: templates/ecommerce/checkout.html:93
 msgid "Credit card number is required"
-msgstr ""
+msgstr "Numéro (de la carte) requis"
 
 #: templates/ecommerce/checkout.html:98
 msgid "Expiration"
-msgstr ""
+msgstr "Date d’expiration"
 
 #: templates/ecommerce/checkout.html:101
 msgid "Expiration date required"
-msgstr ""
+msgstr "Date d’expiration requise"
 
 #: templates/ecommerce/checkout.html:109
 msgid "Security code required"
-msgstr ""
+msgstr "Code de sécurité"
 
 #: templates/ecommerce/checkout.html:116
 msgid "Continue"
-msgstr ""
+msgstr "Continuer"
 
 #: templates/ecommerce/checkout.html:145 templates/ecommerce/checkout.html:153
 msgid "Payment Done"
-msgstr ""
+msgstr "Paiement éffectué"
 
 #: templates/ecommerce/checkout.html:178 templates/ecommerce/checkout.html:186
 msgid "Promo Applied"
-msgstr ""
+msgstr "Code promo appliqué"
 
 #: templates/template-parts/account-sidebar.html:9
 msgid "Joined"
-msgstr ""
+msgstr "Inscrit le"
 
 #: templates/template-parts/base-settings.html:22
 msgid "Profile Settings"
-msgstr ""
+msgstr "Paramètres du profile"
 
 #: templates/template-parts/base-settings.html:23
-#, fuzzy
 #| msgid "Top-selling Courses"
 msgid "Enrolled Courses"
-msgstr "Cours les plus vendus"
+msgstr "Cours/Formations acheté(e)s"
 
 #: templates/template-parts/base-settings.html:27
 msgid "Students"
-msgstr ""
+msgstr "Apprenants"
 
 #: templates/template-parts/base-settings.html:28
-#, fuzzy
 #| msgid "Top-selling Courses"
 msgid "Your Courses"
-msgstr "Cours les plus vendus"
+msgstr "Vos cours/formations"
 
 #: templates/template-parts/base-settings.html:38
 #: templates/template-parts/top-navbar.html:44
 msgid "Hi"
-msgstr ""
+msgstr "Salut"
 
 #: templates/template-parts/base-settings.html:38
 msgid "Nice to see you again!"
-msgstr ""
+msgstr "Ravi de vous revoir !"
 
 #: templates/template-parts/base-settings.html:39
 msgid "Its your settings panel."
-msgstr ""
+msgstr "Votre panneau de paramétrage"
 
 #: templates/template-parts/certificate.html:78
 #: templates/template-parts/certificate.html:84
 msgid "Certificate of Completion"
-msgstr ""
+msgstr "Certificat"
 
 #: templates/template-parts/enrolled-product-cont.html:8
 #: templates/template-parts/product-cont.html:9
 msgid "View"
-msgstr ""
+msgstr "Voir"
 
 #: templates/template-parts/footer.html:11
 msgid "Footer Description"
 msgstr ""
+"Cette plateforme propose une pléthore de cours et formations qui vous montrent pas-à-pas comment commencer votre propre business même avec un petit capital.\n"
+"Si vous avez besoin d’un consultant, contactez-nous !"
 
 #: templates/template-parts/footer.html:22
 msgid "Links"
-msgstr ""
+msgstr "Liens"
 
 #: templates/template-parts/footer.html:34
 msgid "Contact Us"
-msgstr ""
+msgstr "Nous contacter"
 
 #: templates/template-parts/footer.html:42
 msgid "telephone-num"
-msgstr ""
+msgstr "Appels & WhatsApp"
 
 #: templates/template-parts/footer.html:43
 msgid "Phone Number"
-msgstr ""
+msgstr "+237 690 91 20 54"
 
 #: templates/template-parts/footer.html:51
 msgid "info@email.com"
-msgstr ""
+msgstr "Assistance 24/7 via whatsapp"
 
 #: templates/template-parts/footer.html:52
 msgid "services@email.com"
-msgstr ""
+msgstr "Certificat pour tous les cours/formations"
 
 #: templates/template-parts/footer.html:60
 msgid "125, Park street aven, Brocklyn,"
-msgstr ""
+msgstr "Cité des palmiers, Douala"
 
 #: templates/template-parts/footer.html:60
 msgid "Newyork."
-msgstr ""
+msgstr "Cameroun"
 
 #: templates/template-parts/footer.html:74
 msgid "Copyright"
-msgstr ""
+msgstr "Copyright"
 
 #: templates/template-parts/footer.html:74
 msgid "All rights reserved."
-msgstr ""
+msgstr "Tous droits réservés"
 
 #: templates/template-parts/my-students.html:5
-#, fuzzy
 #| msgid "Top-selling Courses"
 msgid "Your Students"
-msgstr "Cours les plus vendus"
+msgstr "Vos apprenants"
 
 #: templates/template-parts/profile-edit-form.html:11
 msgid "Update Profile"
-msgstr ""
+msgstr "Modifier votre profile"
 
 #: templates/template-parts/top-navbar.html:9
 msgid "E-Learning"
-msgstr ""
+msgstr "E-Learning"
 
 #: templates/template-parts/top-navbar.html:16
 msgid "Language"
@@ -468,25 +463,24 @@ msgstr "Langue"
 
 #: templates/template-parts/top-navbar.html:32
 msgid "Search"
-msgstr ""
+msgstr "Rechercher"
 
 #: templates/template-parts/top-navbar.html:36
-#, fuzzy
 #| msgid "Top-selling Courses"
 msgid "All Courses"
-msgstr "Cours les plus vendus"
+msgstr "Tous les cours"
 
 #: templates/template-parts/top-navbar.html:46
 msgid "Cart"
-msgstr ""
+msgstr "Panier"
 
 #: templates/template-parts/top-navbar.html:47
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: templates/template-parts/top-navbar.html:48
 msgid "Log Out"
-msgstr ""
+msgstr "Déconnexion"
 
 #~ msgid "Learn With Us"
 #~ msgstr "Apprenez avec nous"

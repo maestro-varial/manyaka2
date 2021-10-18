@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 from courses.models import Course
-from .forms import ProfileUpdateForm, SignUpForm
+from .forms import ProfileUpdateForm, SignUpForm, UpdateProfileForm, UpdateUserForm
 from .models import Profile
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -66,8 +66,8 @@ class EditProfileAPI(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        user_form = SignUpForm(instance=request.user)
-        profile_form = ProfileUpdateForm(instance=request.user.profile)
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
         context = {
             'user_form': user_form,
             'profile_form': profile_form
@@ -78,11 +78,13 @@ class EditProfileAPI(APIView):
         return Response(json.dumps(res.strip()),status=status.HTTP_202_ACCEPTED)
 
     def post(self, request):
-        user_form = SignUpForm(request.POST or None, request.FILES or None, instance=request.user)
-        profile_form = ProfileUpdateForm(request.POST or None, request.FILES or None, instance=request.user.profile)
+        print('post!!!')
+        user_form = UpdateUserForm(request.POST or None, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST or None, request.FILES or None, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+
             messages.success(request, 'Your profile was successfully updated!')
             # return reverse(request, 'users:profile')
         else:

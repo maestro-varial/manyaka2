@@ -1,14 +1,15 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load i18n %}
-<form action="{% url 'users:EditProfileAPI' %}" method="post" class="row">
+<form data-url="{% url 'users:EditProfileAPI' %}" method="post" class="row" id="profile-edit-form" enctype="multipart/form-data">
     {% csrf_token %}
     {{user_form|crispy}}
     {{profile_form|crispy}}
     <div class="col-12">
         <hr class="mt-2 mb-3">
         <div class="d-flex flex-wrap justify-content-between align-items-center">
-            <button class="btn btn-style-1 btn-primary" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success">{% trans "Update Profile" %}</button>
+            <button class="btn btn-style-1 btn-primary" type="button" data-form="profile-edit-form" data-toast-position="topRight" data-toast-type="success" onclick="submitProfileEditForm(this)">{% trans "Update Profile" %}</button>
+            <input type="submit" class="hidden">
         </div>
     </div>
 </form>
