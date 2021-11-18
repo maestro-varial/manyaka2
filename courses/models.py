@@ -123,6 +123,12 @@ class Course(TranslatableModel):
         url = reverse('courses:GenerateCertificateView')
         return  f"{url}?course={self.slug}&download=true"
 
+    def get_vendor(self):
+        try:
+            return self.author.user.vendor
+        except:
+            return None
+
     def imageURL(self):
         try:
             return self.image.url
@@ -214,16 +220,6 @@ class Reviews(models.Model):
     def __str__(self):
         return f"{self.content[:50]}"
 
-    def validate_unique(self, *args, **kwargs):
-        super(Category, self).validate_unique(*args, **kwargs)
-
-        if self.__class__.objects.\
-                filter(course=self.course, user=self.user).\
-                exists():
-            raise ValidationError(
-                message='Review already exists.',
-                code='unique_together',
-            )
 
 
 class Testimonial(TranslatableModel):

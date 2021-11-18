@@ -66,7 +66,7 @@ class CreateMcqForm(TranslatableModelForm):
 class CreateCourseForm(TranslatableModelForm):
     class Meta:
         model = Course
-        exclude = ['author','hit','button_text','maincourse']
+        exclude = ['author','hit','button_text','maincourse','approved']
 
 
 class CertificateForm(TranslatableModelForm):

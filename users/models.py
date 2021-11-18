@@ -29,6 +29,9 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    # def get_pending_orders(self):
+    #     return self.user.orders
+
 
 
 @receiver(post_save, sender=User)

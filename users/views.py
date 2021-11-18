@@ -91,14 +91,14 @@ class EditProfileAPI(APIView):
             # print(user_form)
             messages.error(request, 'Please correct the error below.')
 
-        context = {
-            'user_form': user_form,
-            'profile_form': profile_form
-        }
-        res = render_to_string('template-parts/profile-edit-form.html', context)
-        if not res.strip():
-            Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(json.dumps(res.strip()),status=status.HTTP_202_ACCEPTED)
+        # context = {
+        #     'user_form': user_form,
+        #     'profile_form': profile_form
+        # }
+        # res = render_to_string('template-parts/profile-edit-form.html', context)
+        # if not res.strip():
+        #     Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_202_ACCEPTED)
 
 
 

@@ -26,6 +26,8 @@ urlpatterns = i18n_patterns(
     path('rosetta/', include('rosetta.urls')),
     path('cart/', include('ecommerce.urls')),
     path('auth/', include('users.urls')),
+    path('vendor/', include('vendor.urls')),
+    path('dashboard/', include('dashboard.urls')),
 )
 
 if settings.DEBUG:

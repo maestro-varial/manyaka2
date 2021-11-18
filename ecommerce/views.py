@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from courses.models import Course
 from courses.custom_perms import hasEnrolled
+from ecommerce.payment_apis import request_to_pay
 from .models import Order, OrderItem, Promocode
 from .forms import CouponForm
 import datetime
@@ -52,20 +53,74 @@ class UpdateItemAPI(APIView):
 class ProceedCheckoutAPI(APIView):
     permission_classes = (IsAuthenticated,)
     def post(self,request):
-        # TODO: Do payment process here
-        messages.success(request, "Payment Succeeded!")
-
         user = request.user
-        order = Order.objects.get(user=user, complete=False)
+        order = Order.objects.get(user=user, complete= False)
 
-        for item in order.items.all():
-            user.profile.enrolled.add(item.referring_course)
+        payment_method = request.POST.get('paymentMethod', None)
+        payment_number = request.POST.get('payment-number', None)
 
-        order.complete = True
-        order.save()
+        api_response = request_to_pay(payment_number, payment_method, order)
+        print(api_response)
+        if not api_response:
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+        payment_data = api_response.get("data", None)
+        footprint = payment_data.get("adpFootprint", None)
+        transaction_id = payment_data.get("orderNumber", None)
+        # {'pesake': {'code': '', 'level': 0, 'detail': None}, 'data': {'adpFootprint': 'PHARMONY1____DQ52HK1B', 'orderNumber': 'Mw', 'status': 'E', 'description': None}}
+        
+        if payment_data and footprint and transaction_id:
+            order.transaction_id = transaction_id
+            order.footprint = footprint
+            order.complete = True
+            order.save()
+
+            messages.success(request, "Payment Succeeded!")
 
 
-        return Response(status=status.HTTP_200_OK)
+            for item in order.items.all():
+                user.profile.enrolled.add(item.referring_course)
+
+            order.complete = True
+            order.save()
+
+            return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+# class ProceedCheckoutAPI(APIView):
+#     permission_classes = (IsAuthenticated,)
+#     def post(self,request):
+#         user = request.user
+#         orderItems = OrderItem.objects.filter(referring_course__author=user.profile, vendor_paid= False)
+
+#         amount = 0
+#         vendor = None
+
+#         for item in orderItems:
+#             amount += item.get_total
+#             vendor = item.get_vendor
+
+#         # TODO: Do payment process here
+#         payment_method = request.POST.get('paymentMethod', None)
+#         payment_number = request.POST.get('payment-number', None)
+
+#         api_response = request_to_pay(payment_number, payment_method, round(amount, 2), vendor)
+
+#         payment_data = api_response.get("data", None)
+#         payment_data.get("adpFootprint", None)
+#         payment_data.get("orderNumber", None)
+#         # {'pesake': {'code': '', 'level': 0, 'detail': None}, 'data': {'adpFootprint': 'PHARMONY1____DQ52HK1B', 'orderNumber': 'Mw', 'status': 'E', 'description': None}}
+
+
+#         # messages.success(request, "Payment Succeeded!")
+
+
+#         # for item in order.items.all():
+#         #     user.profile.enrolled.add(item.referring_course)
+
+#         # order.complete = True
+#         # order.save()
+
+#         return Response(status=status.HTTP_200_OK)
 
 
 def get_coupon(request, code):

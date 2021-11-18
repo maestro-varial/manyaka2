@@ -62,52 +62,21 @@
             <h4 class="mb-3">{% trans "Payment" %}</h4>
             <form id="checkout-form" data-url="{% url 'ecommerce:ProceedCheckoutAPI' %}" class="needs-validation"> {% comment %} 'was-validated' class to show invalid mode {% endcomment %}
                 <div class="my-3">
-                    <div class="form-check">
-                    <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" value='' required >
-                    <label class="form-check-label" for="credit">{% trans "Credit card" %}</label>
-                    </div>
-                    <div class="form-check">
-                    <input id="debit" name="paymentMethod" type="radio" class="form-check-input" value='' required >
-                    <label class="form-check-label" for="debit">{% trans "Debit card" %}</label>
-                    </div>
-                    <div class="form-check">
-                    <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" value='' required >
-                    <label class="form-check-label" for="paypal">{% trans "PayPal" %}</label>
-                    </div>
+                    {% for method in paymentMethods %}
+                        <div class="form-check">
+                            <input id="{{method.meanCode}}" name="paymentMethod" type="radio" class="form-check-input" value='{{method.meanCode}}' required checked>
+                            <label class="form-check-label" for="{{method.meanCode}}">{% trans method.meanCode %}</label>
+                        </div>
+                    {% endfor %}
                 </div>
 
                 <div class="row gy-3">
-                    <div class="col-md-6">
-                    <label for="cc-name" class="form-label">{% trans "Name on card" %}</label>
-                    <input type="text" class="form-control" id="cc-name" placeholder="" value='' required >
-                    <small class="text-muted">{% trans "Full name as displayed on card" %}</small>
-                    <div class="invalid-feedback">
-                        {% trans "Name on card is required" %}
-                    </div>
-                    </div>
-
-                    <div class="col-md-6">
-                    <label for="cc-number" class="form-label">{% trans "Credit card number" %}</label>
-                    <input type="text" class="form-control" id="cc-number" placeholder="" value='' required >
-                    <div class="invalid-feedback">
-                        {% trans "Credit card number is required" %}
-                    </div>
-                    </div>
-
-                    <div class="col-md-3">
-                    <label for="cc-expiration" class="form-label">{% trans "Expiration" %}</label>
-                    <input type="text" class="form-control" id="cc-expiration" placeholder="" value='' required >
-                    <div class="invalid-feedback">
-                        {% trans "Expiration date required" %}
-                    </div>
-                    </div>
-
-                    <div class="col-md-3">
-                    <label for="cc-cvv" class="form-label">CVV</label>
-                    <input type="text" class="form-control" id="cc-cvv" placeholder="" value='' required >
-                    <div class="invalid-feedback">
-                        {% trans "Security code required" %}
-                    </div>
+                    <div class="col">
+                        <label for="payment-number" class="form-label">Payment Number</label>
+                        <input type="text" class="form-control" id="payment-number" name="payment-number" placeholder="" value='' required >
+                        <div class="invalid-feedback">
+                            {% trans "Payment Number required" %}
+                        </div>
                     </div>
                 </div>
 
@@ -157,6 +126,7 @@ document.getElementById('checkout-form').addEventListener('submit', (event) => {
         }
     });
 });
+
 document.getElementById('promo-form').addEventListener('submit', (event) => {
     event.preventDefault();
     if (loading()) return;
